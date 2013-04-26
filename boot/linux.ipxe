@@ -1,0 +1,69 @@
+#!ipxe
+
+goto ${menu} ||
+
+:linux_menu
+
+menu Linux Operating Systems - Current Selected Architecture [ ${arch} ]
+iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
+
+# RPM based systems
+item --gap RPM Based Operating Systems
+item centos ${space} CentOS 
+item fedora ${space} Fedora
+item opensuse ${space} openSUSE
+
+# Deb based systems
+item --gap Debian Based Operating Systems
+item debian ${space} Debian
+item ubuntu ${space} Ubuntu
+
+## BSD systems
+#item --gap BSD Based Operating Systems
+#item bsd ${space} BSD systems
+
+## Other systems
+item --gap Other Linux Distributions
+item archlinux ${space} ArchLinux
+item gentoo ${space} Gentoo
+item tinycore ${space} TinyCoreLinux
+
+# Options
+item --gap Options:
+iseq ${arch} x86_64 && set bits 64 || set bits 32
+item changebits ${space} Architecture: ${arch} (${bits}bit)
+item params_menu ${space} Kernel parameters: ${params}
+
+choose menu || goto linux_exit
+echo ${cls}
+goto ${menu} ||
+chain ${menu}.ipxe || goto error
+goto linux_exit
+
+:linux_exit
+clear menu
+chain menu.ipxe
+
+:changebits
+iseq ${arch} x86_64 && set arch i386 || set arch x86_64
+goto linux_menu
+
+:fedora
+chain fedora.ipxe
+goto linux_menu
+
+:centos
+chain centos.ipxe
+goto linux_menu
+
+:debian
+chain debian.ipxe
+goto linux_menu
+
+:ubuntu
+chain ubuntu.ipxe
+goto linux_menu
+
+:opensuse
+chain opensuse.ipxe
+goto linux_menu

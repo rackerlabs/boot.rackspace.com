@@ -1,0 +1,23 @@
+#!ipxe
+
+menu Windows 
+item --gap Windows Boot Environments
+item winpe ${space} Windows Preinstallation Environment (WinPE) [ Work in Progress ]
+choose version || goto windows_exit
+
+set mirror http://boot.rackspace.com/windows/winpe/
+
+:winpe
+set arch amd64
+kernel ${mirror}wimboot
+initrd ${mirror}${arch}/media/bootmgr                     bootmgr
+initrd ${mirror}${arch}/media/Boot/BCD                    BCD
+initrd ${mirror}${arch}/media/Boot/Fonts/segmono_boot.ttf segmono_boot.ttf
+initrd ${mirror}${arch}/media/Boot/Fonts/segoe_slboot.ttf segoe_slboot.ttf
+initrd ${mirror}${arch}/media/Boot/Fonts/wgl4_boot.ttf    wgl4_boot.ttf
+initrd ${mirror}${arch}/media/Boot/boot.sdi               boot.sdi
+initrd ${mirror}${arch}/media/sources/boot.wim            boot.wim
+boot
+
+:windows_exit
+exit 0

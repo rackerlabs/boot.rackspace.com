@@ -1,0 +1,64 @@
+#!ipxe
+
+# Fedora Operating System
+# http://wwww.fedora.org
+
+set ksurl http://boot.rackspace.com/ks/
+
+goto ${menu} ||
+
+:fedora
+set os Fedora
+menu Fedora ${arch}
+item 18 ${os} 18
+item 17 ${os} 17
+item 16 ${os} 16
+item 15 ${os} 15
+isset ${version} || choose version || goto linux_menu
+
+# workaround for fedora 17
+iseq ${version} 17 && set params rd.debug ${params} ||
+
+goto fedora_${version} ||
+set dir fedora/releases/${version}/${os}/${arch}/os
+set repo repo=${mirror}/${dir}
+:fedora_setvars
+#set osks ${ksurl}${version}
+set osks ${ksurl}fedora
+goto boottype
+
+:boottype
+set ova ${os} ${version}
+menu ${os} ${arch} boot type
+item normal ${ova}
+item ks ${ova} minimal server kickstart 
+item rescue ${ova} rescue
+item remote ${ova} rescue with ssh
+isset ${bt} || choose bt || goto fedora
+echo ${cls}
+iseq ${bt} ks && set params ksdevice=bootif ks=${osks} ${params} ||
+iseq ${bt} rescue && set params rescue ${params} ||
+iseq ${bt} remote && set params ksdevice=bootif ks=${ksurl}rescue ${params} ||
+goto bootos_${bt} ||
+goto bootos_images
+
+:bootos_images
+echo Loading from ${mirror}/${dir}/isolinux/
+echo ${}  ${repo}
+echo ${}  ${params}
+imgfree
+# load vmlinuz and initrd
+kernel ${mirror}/${dir}/isolinux/vmlinuz
+initrd ${mirror}/${dir}/isolinux/initrd.img
+imgargs vmlinuz ${repo} ${params}
+# use method= instad of repo= for CentOS 5
+iseq ${version} 5 && imgargs vmlinuz method=${mirror}/${dir} ${params} ||
+imgstat
+isset ${debug} && prompt ||
+boot vmlinuz
+goto linux_menu
+
+:linux_menu
+clear menu
+chain linux.ipxe
+exit 0

@@ -1,0 +1,24 @@
+#!ipxe
+
+# Gentoo Operating System
+# http://www.gentoo.org
+
+set default_version 20130411
+
+iseq ${arch} x86_64 && set gt_arch amd64 || set gt_arch x86
+
+echo For Gentoo you need ISO image version number.
+echo See this link for latest build version:
+echo http://distfiles.gentoo.org/releases/${gt_arch}/autobuilds/current-iso/default/
+echo Example: ${default_version}
+
+echo -n Enter version: ${} && read version
+
+isset ${version} || set version ${default_version}
+
+set mirror http://mirror.rackspace.com/gentoo/
+set dir releases/${gt_arch}/autobuilds/current-iso/default/${version}/
+set iso install-${gt_arch}-minimal-${version}.iso
+
+initrd ${mirror}${dir}${iso}
+chain memdisk iso

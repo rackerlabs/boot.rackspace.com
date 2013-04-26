@@ -1,0 +1,65 @@
+#!ipxe
+
+# CentOS Operating System
+# http://www.centos.org
+
+set ksurl http://boot.rackspace.com/ks/
+
+goto ${menu} ||
+
+:centos
+clear version
+set os CentOS
+menu ${os} ${arch}
+item 6.4 ${os} 6.4
+item 6.3 ${os} 6.3
+item 5.9 ${os} 5.9
+item 5.8 ${os} 5.8
+item other Choose other version [o]
+isset ${version} || choose version || goto linux_menu
+iseq ${version} other || goto centos_skip_read_version
+echo ${cls}
+echo -n Enter version: ${} && read version
+:centos_skip_read_version
+set dir ${menu}/${version}/os/${arch}
+set repo repo=${mirror}/${dir}
+set osks ${ksurl}centos${version}
+goto boottype
+
+:boottype
+set ova ${os} ${version}
+menu ${os} ${arch} boot type
+item normal ${ova}
+item ks ${ova} minimal server kickstart
+item desktop ${ova} desktop kickstart
+item rescue ${ova} rescue
+item remote ${ova} rescue with ssh
+isset ${bt} || choose bt || goto centos
+echo ${cls}
+iseq ${bt} ks && set params ksdevice=bootif ks=${osks} ${params} ||
+iseq ${bt} desktop && set params ksdevice=bootif ks=${ksurl}/pc pkgs=desktop ${params} ||
+iseq ${bt} rescue && set params rescue ${params} ||
+iseq ${bt} remote && set params ksdevice=bootif ks=${ksurl}rescue ${params} ||
+goto bootos_${bt} ||
+goto bootos_images
+
+:bootos_images
+echo Loading from ${mirror}/${dir}/isolinux/
+echo ${}  ${repo}
+echo ${}  ${params}
+imgfree
+# load vmlinuz and initrd
+kernel ${mirror}/${dir}/isolinux/vmlinuz
+initrd ${mirror}/${dir}/isolinux/initrd.img
+imgargs vmlinuz ${repo} ${params}
+# use method= instad of repo= for CentOS 5
+iseq ${version} 5 && imgargs vmlinuz method=${mirror}/${dir} ${params} ||
+imgstat
+isset ${debug} && prompt ||
+boot vmlinuz
+goto linux_menu
+
+:linux_menu
+clear menu
+chain linux.ipxe
+exit 0

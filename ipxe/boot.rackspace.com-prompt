@@ -1,0 +1,26 @@
+#!ipxe
+
+#:prompt
+#prompt --key 0x197e --timeout 120 Press F12 to install from network && goto start || goto boot
+
+:start
+set boot_rackspace_version 1
+goto static
+
+:static
+echo DHCP Server not found, enabling manual override:
+ifopen net0
+echo -n IP: && read net0/ip
+echo -n Subnet mask: && read net0/netmask
+echo -n Gateway: && read net0/gateway
+echo -n DNS: && read dns
+goto menu || goto failsafe
+
+:menu
+chain http://boot.rackspace.com/menu.ipxe
+
+:failsafe
+goto start
+
+:boot
+sanboot --no-describe --drive 0x80

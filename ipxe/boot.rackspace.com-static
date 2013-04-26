@@ -1,0 +1,22 @@
+#!ipxe
+
+:start
+set boot_rackspace.com_version 1
+echo boot.rackspace.com iPXE loader version 1
+
+:static
+echo Static IP mode engaged, please enter in your IP address information:
+imgfree
+ifclose net0
+echo -n IP: && read net0/ip
+echo -n Subnet mask: && read net0/netmask
+echo -n Gateway: && read net0/gateway
+echo -n DNS: && read dns
+ifopen net0
+goto menu || goto failsafe
+
+:menu
+chain http://boot.rackspace.com/menu.ipxe
+
+:failsafe
+goto start
