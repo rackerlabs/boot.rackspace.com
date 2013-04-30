@@ -5,7 +5,7 @@ set boot_rackspace.com_version 1
 echo boot.rackspace.com iPXE loader version 1
 
 :static
-echo Static IP mode engaged, please enter in your IP address information:
+echo Please enter in the networking information of your Cloud Server:
 imgfree
 ifclose net0
 echo -n IP: && read net0/ip
@@ -13,10 +13,12 @@ echo -n Subnet mask: && read net0/netmask
 echo -n Gateway: && read net0/gateway
 echo -n DNS: && read dns
 ifopen net0
+echo Attempting chainload of boot.rackspace.com...
 goto menu || goto failsafe
 
 :menu
 chain http://boot.rackspace.com/menu.ipxe
 
 :failsafe
+echo Attempt to load boot.rackspace.com failed... restarting...
 goto start
