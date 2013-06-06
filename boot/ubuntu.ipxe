@@ -6,19 +6,21 @@
 goto ${menu}
 
 :ubuntu
-set debmirror http://mirror.rackspace.com/ubuntu/
+set mirror mirror.rackspace.com
+set os ubuntu
+set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/get_netmask=${netX/netmask} netcfg/get_gateway=${netX/gateway} netcfg/get_nameservers=${dns} netcfg/confirm_static=true netcfg/disable_autoconfig=true
 
-set os Ubuntu
-menu ${os} ${arch_a}
-item raring ${os} 13.04 Raring Ringtail
-item quantal ${os} 12.10 Quantal Quetzal
-item precise ${os} 12.04 LTS Precise Pangolin
-item oneiric ${os} 11.10 Oneiric Ocelot
-item natty ${os} 11.04 Natty Narwhal
+menu Ubuntu ${arch_a}
+item raring Ubuntu 13.04 Raring Ringtail
+item quantal Ubuntu 12.10 Quantal Quetzal
+item precise Ubuntu 12.04 LTS Precise Pangolin
+item oneiric Ubuntu 11.10 Oneiric Ocelot
+item natty Ubuntu 11.04 Natty Narwhal
 choose version || goto ubuntu_exit
+set mirrorcfg mirror/suite=${version} mirror/country=manual mirror/http/hostname=${mirror} mirror/http/directory=/${os}
 
 :deb_boot_type
-set dir dists/${version}/main/installer-${arch_a}/current/images/netboot/
+set dir ${os}/dists/${version}/main/installer-${arch_a}/current/images/netboot/
 
 menu ${os} boot parameters
 item install ${os} install
@@ -45,11 +47,11 @@ goto deb_boot
 
 :deb_install
 :deb_boot
-set dir ${dir}${menu}-installer/${arch_a}/
+set dir ${dir}${menu}-installer/${arch_a}
 imgfree
 echo Boot parameters: ${install_params} ${desktop_param} -- quiet ${params}
-kernel ${debmirror}${dir}linux ${install_params} ${desktop_param} -- quiet ${params}
-initrd ${debmirror}${dir}initrd.gz
+kernel http://${mirror}/${dir}/linux ${install_params} ${desktop_param} ${netcfg} ${mirrorcfg} -- quiet ${params}
+initrd http://${mirror}/${dir}/initrd.gz
 boot
 
 :deb_pxe
