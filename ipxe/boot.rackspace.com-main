@@ -1,8 +1,5 @@
 #!ipxe
 
-#:prompt
-#prompt --key 0x197e --timeout 120 Press F12 to install from network && goto start || goto boot
-
 :start
 set boot_rackspace_version 1
 echo boot.rackspace.com iPXE loader version 1
@@ -22,10 +19,10 @@ goto menu || goto failsafe
 
 :menu
 chain http://boot.rackspace.com/menu.ipxe
+goto boot
 
 :failsafe
 goto start
 
 :boot
-
 sanboot --no-describe --drive 0x80
