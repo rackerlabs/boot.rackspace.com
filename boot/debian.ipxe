@@ -6,17 +6,19 @@
 goto ${menu}
 
 :debian
-set debmirror http://mirror.rackspace.com/debian/
+set mirror mirror.rackspace.com
+set os debian
+set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/get_netmask=${netX/netmask} netcfg/get_gateway=${netX/gateway} netcfg/get_nameservers=${dns} netcfg/confirm_static=true netcfg/disable_autoconfig=true
 
-set os Debian
-menu ${os} ${arch_a}
-item squeeze ${os} squeeze (stable)
-item wheezy ${os} wheezy (testing)
-item sid ${os} sid (unstable) 
+menu Debian ${arch_a}
+item squeeze Debian squeeze (stable)
+item wheezy Debian wheezy (testing)
+item sid Debian sid (unstable) 
 choose version || goto debian_exit
+set mirrorcfg mirror/suite=${version} mirror/country=manual mirror/http/hostname=${mirror} mirror/http/directory=/${os}
 
 :deb_boot_type
-set dir dists/${version}/main/installer-${arch_a}/current/images/netboot/
+set dir ${os}/dists/${version}/main/installer-${arch_a}/current/images/netboot/
 
 menu ${os} boot parameters
 item install ${os} install
@@ -45,8 +47,8 @@ goto deb_boot
 set dir ${dir}${menu}-installer/${arch_a}/
 imgfree
 echo Boot parameters: ${install_params} ${desktop_param} -- quiet ${params}
-kernel ${debmirror}${dir}linux ${install_params} ${desktop_param} -- quiet ${params}
-initrd ${debmirror}${dir}initrd.gz
+kernel http://${mirror}/${dir}/linux ${install_params} ${desktop_param} ${netcfg} ${mirrorcfg} -- quiet ${params}
+initrd http://${mirror}/${dir}/initrd.gz
 boot
 
 :debian_exit
