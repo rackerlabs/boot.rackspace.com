@@ -10,7 +10,7 @@ goto ${menu} ||
 :centos
 clear version
 set os CentOS
-set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} method=http://mirror.rackspace.com/centos
+set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns}
 menu ${os} ${arch}
 item 6.4 ${os} 6.4
 item 6.3 ${os} 6.3
