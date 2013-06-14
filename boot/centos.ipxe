@@ -10,6 +10,7 @@ goto ${menu} ||
 :centos
 clear version
 set os CentOS
+set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} method=http://mirror.rackspace.com/centos
 menu ${os} ${arch}
 item 6.4 ${os} 6.4
 item 6.3 ${os} 6.3
@@ -51,7 +52,7 @@ imgfree
 # load vmlinuz and initrd
 kernel ${mirror}/${dir}/isolinux/vmlinuz
 initrd ${mirror}/${dir}/isolinux/initrd.img
-imgargs vmlinuz ${repo} ${params}
+imgargs vmlinuz ${repo} ${params} ${netcfg}
 # use method= instad of repo= for CentOS 5
 iseq ${version} 5 && imgargs vmlinuz method=${mirror}/${dir} ${params} ||
 imgstat
