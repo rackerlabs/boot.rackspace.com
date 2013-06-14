@@ -11,8 +11,9 @@ set os debian
 set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/get_netmask=${netX/netmask} netcfg/get_gateway=${netX/gateway} netcfg/get_nameservers=${dns} netcfg/confirm_static=true netcfg/disable_autoconfig=true
 
 menu Debian ${arch_a}
-item squeeze Debian squeeze (stable)
-item wheezy Debian wheezy (testing)
+item wheezy Debian 7.0 (wheezy)
+item squeeze Debian 6.0 (squeeze)
+item jessie Debian jessie (testing)
 item sid Debian sid (unstable) 
 choose version || goto debian_exit
 set mirrorcfg mirror/suite=${version} mirror/country=manual mirror/http/hostname=${mirror} mirror/http/directory=/${os}
@@ -44,7 +45,7 @@ goto deb_boot
 
 :deb_install
 :deb_boot
-set dir ${dir}${menu}-installer/${arch_a}/
+set dir ${dir}${menu}-installer/${arch_a}
 imgfree
 echo Boot parameters: ${install_params} ${desktop_param} -- quiet ${params}
 kernel http://${mirror}/${dir}/linux ${install_params} ${desktop_param} ${netcfg} ${mirrorcfg} -- quiet ${params}
