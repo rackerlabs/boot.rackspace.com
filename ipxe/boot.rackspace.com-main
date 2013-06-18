@@ -10,11 +10,14 @@ goto menu
 
 :static
 echo DHCP Server not found, enabling manual override:
-ifopen net0
+imgfree
+ifclose net0
 echo -n IP: && read net0/ip
 echo -n Subnet mask: && read net0/netmask
 echo -n Gateway: && read net0/gateway
 echo -n DNS: && read dns
+ifopen net0
+echo Attempting chainload of boot.rackspace.com...
 goto menu || goto failsafe
 
 :menu
@@ -22,6 +25,7 @@ chain http://boot.rackspace.com/menu.ipxe
 goto boot
 
 :failsafe
+echo Attempt to load boot.rackspace.com failed... restarting...
 goto start
 
 :boot

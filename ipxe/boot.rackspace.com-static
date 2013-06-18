@@ -1,7 +1,7 @@
 #!ipxe
 
 :start
-set boot_rackspace.com_version 1
+set boot_rackspace_version 1
 echo boot.rackspace.com iPXE loader version 1
 
 :static
@@ -18,7 +18,11 @@ goto menu || goto failsafe
 
 :menu
 chain http://boot.rackspace.com/menu.ipxe
+goto boot
 
 :failsafe
 echo Attempt to load boot.rackspace.com failed... restarting...
 goto start
+
+:boot
+sanboot --no-describe --drive 0x80
