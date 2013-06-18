@@ -5,7 +5,7 @@ set url http://boot.rackspace.com
 set mirror http://mirror.rackspace.com
 
 # Ensure we're running the proper version, not in use yet, stubbed out
-iseq ${boot_rackspace.com_version} 1 && goto version_ok ||
+iseq ${boot_rackspace_version} 1 && goto version_ok ||
 echo
 echo IPXE version too old, rechaining ...
 chain --replace ${url}/ipxe/ipxe.kpxe ||
