@@ -52,7 +52,7 @@ imgfree
 # load vmlinuz and initrd
 kernel ${mirror}/${dir}/isolinux/vmlinuz
 initrd ${mirror}/${dir}/isolinux/initrd.img
-imgargs vmlinuz ${repo} ${params} ${netcfg}
+imgargs vmlinuz ${repo} ${params} ${netcfg} clocksource=hpet
 # use method= instad of repo= for CentOS 5
 iseq ${version} 5 && imgargs vmlinuz method=${mirror}/${dir} ${params} ||
 imgstat
