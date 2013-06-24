@@ -10,13 +10,10 @@ set mirror http://boot.rackspace.com/windows/winpe/
 :winpe
 set arch amd64
 kernel ${mirror}wimboot
-initrd ${mirror}${arch}/media/bootmgr                     bootmgr
-initrd ${mirror}${arch}/media/Boot/BCD                    BCD
-initrd ${mirror}${arch}/media/Boot/Fonts/segmono_boot.ttf segmono_boot.ttf
-initrd ${mirror}${arch}/media/Boot/Fonts/segoe_slboot.ttf segoe_slboot.ttf
-initrd ${mirror}${arch}/media/Boot/Fonts/wgl4_boot.ttf    wgl4_boot.ttf
-initrd ${mirror}${arch}/media/Boot/boot.sdi               boot.sdi
-initrd ${mirror}${arch}/media/sources/boot.wim            boot.wim
+initrd ${mirror}${arch}/media/BOOTMGR                     BOOTMGR
+initrd ${mirror}${arch}/media/BOOT/BCD                    BCD
+initrd ${mirror}${arch}/media/BOOT/BOOT.SDI               BOOT.SDI
+initrd ${mirror}${arch}/media/SOURCES/BOOT.WIM            BOOT.WIM
 boot
 
 :windows_exit
