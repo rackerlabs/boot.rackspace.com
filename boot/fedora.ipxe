@@ -11,6 +11,7 @@ goto ${menu} ||
 set os Fedora
 menu Fedora ${arch}
 set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns}
+item 19 ${os} 19
 item 18 ${os} 18
 item 17 ${os} 17
 item 16 ${os} 16
@@ -52,8 +53,6 @@ imgfree
 kernel ${mirror}/${dir}/isolinux/vmlinuz
 initrd ${mirror}/${dir}/isolinux/initrd.img
 imgargs vmlinuz ${repo} ${params} ${netcfg}
-# use method= instad of repo= for CentOS 5
-iseq ${version} 5 && imgargs vmlinuz method=${mirror}/${dir} ${params} ||
 imgstat
 isset ${debug} && prompt ||
 boot vmlinuz
