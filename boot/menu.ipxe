@@ -46,7 +46,7 @@ item utils ${space} Utilities
 item shell ${space} iPXE shell
 item netinfo ${space} Network card info
 
-isset ${menu} && set timeout 0 || set timeout 60000
+isset ${menu} && set timeout 0 || set timeout 300000
 choose --timeout ${timeout} --default ${menu} menu || goto local
 echo ${cls}
 goto ${menu} ||
