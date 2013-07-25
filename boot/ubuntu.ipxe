@@ -27,7 +27,6 @@ item install ${os} install
 item rescue ${os} rescue mode
 item automated ${os} automated install
 item expert ${os} expert install
-item pxe ${os} pxelinux boot
 choose --default ${type} type || goto ubuntu
 
 echo ${cls}
@@ -52,14 +51,6 @@ imgfree
 echo Boot parameters: ${install_params} ${desktop_param} -- quiet ${params}
 kernel http://${mirror}/${dir}/linux ${install_params} ${desktop_param} ${netcfg} ${mirrorcfg} -- quiet ${params}
 initrd http://${mirror}/${dir}/initrd.gz
-boot
-
-:deb_pxe
-set 209:string pxelinux.cfg/default
-set 210:string ${debmirror}${dir}
-
-imgfree
-kernel ${url}pxelinux.0 ${params}
 boot
 
 :ubuntu_exit

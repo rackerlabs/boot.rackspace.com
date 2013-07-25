@@ -31,16 +31,14 @@ goto boottype
 set ova ${os} ${version}
 menu ${os} ${arch} boot type
 item normal ${ova}
-item ks ${ova} minimal server kickstart
-item desktop ${ova} desktop kickstart
+#item ks ${ova} minimal server kickstart
+#item desktop ${ova} desktop kickstart
 item rescue ${ova} rescue
-item remote ${ova} rescue with ssh
 isset ${bt} || choose bt || goto centos
 echo ${cls}
-iseq ${bt} ks && set params ksdevice=bootif ks=${osks} ${params} ||
-iseq ${bt} desktop && set params ksdevice=bootif ks=${ksurl}/pc pkgs=desktop ${params} ||
+#iseq ${bt} ks && set params ksdevice=bootif ks=${osks} ${params} ||
+#iseq ${bt} desktop && set params ksdevice=bootif ks=${ksurl}/pc pkgs=desktop ${params} ||
 iseq ${bt} rescue && set params rescue ${params} ||
-iseq ${bt} remote && set params ksdevice=bootif ks=${ksurl}rescue ${params} ||
 goto bootos_${bt} ||
 goto bootos_images
 
