@@ -25,9 +25,9 @@ If you don't have DHCP on your network, you can manually set your network inform
 
 Each region in Rackspace Cloud Servers contains an image called "boot.rackspace.com".  When creating a new instance, specify this image as the image to boot from, select the size of the instance you want, and then boot.  The instance creation will attach a small 1MB iPXE iso to the instance and boot from it.  
 
-Because the iPXE iso doesn't have an agent, the instance will remain in build until the system times out and flips it to active.  You don't have to wait for the instance to go active however to begin working with iPXE.  Once you've booted the instance, you can attach to it with the console.  You'll need to input the address of the instance into the console so that the instance can access the network.
+Once you've booted the instance, you can attach to it with the console.  The networking information of the instance is automatically set so you should drop right into the menu.  In the event automation fails, you'll be prompted for the networking information of the instance.
 
-Once you've inputted the correct IP and DNS information, the instance should chainload onto boot.rackspace.com where you can begin customizing the instance.  This method is ideal for image builders and people who love to tinker.
+The instance should chainload onto boot.rackspace.com where you can begin customizing the instance.  This method is ideal for image builders and people who love to tinker.  For more information on building a Rackspace custom image, see the boot_rax wiki here: https://github.com/rackerlabs/boot_rax/wiki
 
 #### Boot from iPXE ISO
 
@@ -61,11 +61,10 @@ Pull requests are welcome and encouraged.  Feel free to issue a pull request for
 
 #### iPXE Images
 
-All iPXE boot images are regenerated every time a commit occurs to the [iPXE project on Github](https://github.com/ipxe/ipxe) so that the images always have the latest and greatest updates.  It's merged with the [osimages branch](https://github.com/osimages/ipxe/tree/osimages) with the only deviations right now being the menu [color scheme](https://github.com/osimages/ipxe/blob/osimages/src/config/colour.h).  The images are generated and embedded with these [scripts](https://github.com/amesserl/rackspace.com/tree/master/ipxe).
+All iPXE boot images are regenerated every time a commit occurs to the [iPXE project on Github](https://github.com/ipxe/ipxe) so that the images always have the latest and greatest updates.  It's merged with the [osimages branch](https://github.com/amesserl/ipxe/tree/osimages) with the only deviations right now being the menu [color scheme](https://github.com/amesserl/ipxe/blob/osimages/src/config/colour.h).
 
-* [boot.rackspace.com-main](https://github.com/boot_rax/rackspace.com/tree/master/ipxe/boot.rackspace.com-main) - Uses DHCP
-* [boot.rackspace.com-static](https://github.com/boot_rax/rackspace.com/tree/master/ipxe/boot.rackspace.com-static) - Uses Static only
-* [boot.rackspace.com-prompt](https://github.com/amesserl/rackspace.com/tree/master/ipxe/boot.rackspace.com-prompt) - Prompts what type of network you want to boot. [ TODO ]
+* [boot.rackspace.com-main](https://github.com/rackerlabs/boot_rax/blob/master/ipxe/boot.rackspace.com-main) - Uses DHCP
+* [boot.rackspace.com-static](https://github.com/rackerlabs/boot_rax/blob/master/ipxe/boot.rackspace.com-static) - Uses Static only
 
 #### What Operating Systems are currently available on boot.rackspace.com?
 
