@@ -8,7 +8,7 @@ menu Please pick an OpenBSD version
 item 5.3 OpenBSD 5.3
 item 5.2 OpenBSD 5.2
 item 5.1 OpenBSD 5.1
-choose ver || goto openbsd_menu
+choose ver || goto openbsd_exit
 
 iseq ${ver} 5.3 && set image_ver 53 ||
 iseq ${ver} 5.2 && set image_ver 52 ||
@@ -28,3 +28,6 @@ imgfree
 initrd ${src}
 chain http://boot.rackspace.com/memdisk iso raw
 exit
+
+openbsd_exit:
+exit 0
