@@ -33,7 +33,7 @@ If you don't have DHCP on your network, you can manually set your network inform
 
 Obtain ISO image here: 
 
-    wget http://boot.rackspace.com/ipxe/ipxe.iso
+    wget http://boot.rackspace.com/ipxe/boot.rackspace.com-main.iso
 
 To create a bootable CD-ROM, burn the ISO image ipxe.iso (1MB in size) to a blank CD-ROM.  You can also use this ISO file as a virtual CD device in Citrix XenServer, VMware ESXi, VMware Fusion, VirtualBox, or even in a Dell DRAC or HP iLOs virtual CD drive.
 
@@ -41,7 +41,7 @@ To create a bootable CD-ROM, burn the ISO image ipxe.iso (1MB in size) to a blan
 
 Obtain DSK image here:
 
-    wget http://boot.rackspace.com/ipxe/ipxe.dsk
+    wget http://boot.rackspace.com/ipxe/boot.rackspace.com-main.dsk
 
 *Warning: Backup your important data before using USB as it will overwrite anything on the USB key.*
 
