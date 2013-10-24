@@ -11,6 +11,7 @@ set os ubuntu
 set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/get_netmask=${netX/netmask} netcfg/get_gateway=${netX/gateway} netcfg/get_nameservers=${dns} netcfg/confirm_static=true netcfg/disable_autoconfig=true
 
 menu Ubuntu ${arch_a}
+item saucy Ubuntu 13.10 Saucy Salamander
 item raring Ubuntu 13.04 Raring Ringtail
 item quantal Ubuntu 12.10 Quantal Quetzal
 item precise Ubuntu 12.04 LTS Precise Pangolin
