@@ -32,11 +32,9 @@ goto boottype
 set ova ${os} ${version}
 menu ${os} ${arch} boot type
 item normal ${ova}
-#item ks ${ova} minimal server kickstart 
 item rescue ${ova} rescue
 isset ${bt} || choose bt || goto fedora
 echo ${cls}
-#iseq ${bt} ks && set params ksdevice=bootif ks=${osks} ${params} ||
 iseq ${bt} rescue && set params rescue ${params} ||
 goto bootos_${bt} ||
 goto bootos_images

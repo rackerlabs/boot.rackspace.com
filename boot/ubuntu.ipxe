@@ -26,7 +26,6 @@ set dir ${os}/dists/${version}/main/installer-${arch_a}/current/images/netboot/
 menu ${os} boot parameters
 item install ${os} install
 item rescue ${os} rescue mode
-item automated ${os} automated install
 item expert ${os} expert install
 choose --default ${type} type || goto ubuntu
 
@@ -35,10 +34,6 @@ goto deb_${type}
 
 :deb_rescue
 set install_params rescue/enable=true
-goto deb_boot
-
-:deb_automated
-set install_params auto=true priority=critical
 goto deb_boot
 
 :dev_expert
