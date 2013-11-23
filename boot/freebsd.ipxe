@@ -1,0 +1,32 @@
+#!ipxe
+
+# FreeBSD Operating System
+# http://www.freebsd.org
+
+:freebsd_menu
+menu Please pick a FreeBSD version
+item 10.0 FreeBSD 10.0-BETA3
+item 9.2 FreeBSD 9.2
+choose ver || goto freebsd_exit
+
+iseq ${ver} 10.0 && set image_ver 10.0-BETA3 ||
+iseq ${ver} 9.2 && set image_ver 9.2 ||
+
+iseq ${arch} x86_64 && goto freebsd_x64 ||
+set freebsd_arch i386
+goto boot_freebsd
+
+:freebsd_x64
+set freebsd_arch amd64
+goto boot_freebsd
+
+:boot_freebsd
+set src ftp://ftp.freebsd.org/pub/FreeBSD/releases/${freebsd_arch}/${freebsd_arch}/ISO-IMAGES/${ver}/FreeBSD-${image_ver}-RELEASE-${freebsd_arch}-bootonly.iso
+imgfree
+initrd ${src}
+chain http://boot.rackspace.com/memdisk iso raw
+exit
+
+:freebsd_exit
+clear menu
+chain bsd.ipxe

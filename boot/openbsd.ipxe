@@ -31,5 +31,6 @@ initrd ${src}
 chain http://boot.rackspace.com/memdisk iso raw
 exit
 
-openbsd_exit:
-exit 0
+:openbsd_exit
+clear menu
+chain bsd.ipxe

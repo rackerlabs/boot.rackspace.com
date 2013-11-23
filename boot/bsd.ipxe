@@ -8,9 +8,9 @@ menu BSD Operating Systems - Current Selected Architecture [ ${arch} ]
 iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
 
 # BSD based systems
+item --gap BSD Based Operating Systems
 item openbsd ${space} OpenBSD
-#item freebsd ${space} FreeBSD
-#item netbsd ${space} NetBSD
+item freebsd ${space} FreeBSD
 
 # Options
 item --gap Options:
@@ -24,7 +24,8 @@ chain ${menu}.ipxe || goto error
 goto bsd_exit
 
 :bsd_exit
-exit 0
+clear menu
+chain menu.ipxe
 
 :changebits
 iseq ${arch} x86_64 && set arch i386 || set arch x86_64
@@ -32,4 +33,8 @@ goto bsd_menu
 
 :openbsd
 chain openbsd.ipxe
+goto bsd_menu
+
+:freebsd
+chain freebsd.ipxe
 goto bsd_menu
