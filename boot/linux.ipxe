@@ -32,7 +32,6 @@ item tinycore ${space} TinyCoreLinux
 item --gap Options:
 iseq ${arch} x86_64 && set bits 64 || set bits 32
 item changebits ${space} Architecture: ${arch} (${bits}bit)
-item params_menu ${space} Kernel parameters: ${params}
 
 choose menu || goto linux_exit
 echo ${cls}
