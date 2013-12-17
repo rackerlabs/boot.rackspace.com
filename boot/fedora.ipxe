@@ -11,11 +11,11 @@ goto ${menu} ||
 set os Fedora
 menu Fedora ${arch}
 set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns}
+item 20 ${os} 20
 item 19 ${os} 19
 item 18 ${os} 18
 item 17 ${os} 17
 item 16 ${os} 16
-item 15 ${os} 15
 isset ${version} || choose version || goto linux_menu
 
 # workaround for fedora 17
