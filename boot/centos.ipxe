@@ -12,10 +12,9 @@ clear version
 set os CentOS
 set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns}
 menu ${os} ${arch}
+item 6.5 ${os} 6.5
 item 6.4 ${os} 6.4
 item 6.3 ${os} 6.3
-item 5.9 ${os} 5.9
-item 5.8 ${os} 5.8
 item other Choose other version [o]
 isset ${version} || choose version || goto linux_menu
 iseq ${version} other || goto centos_skip_read_version
@@ -49,8 +48,6 @@ imgfree
 kernel ${mirror}/${dir}/isolinux/vmlinuz
 initrd ${mirror}/${dir}/isolinux/initrd.img
 imgargs vmlinuz ${repo} ${params} ${netcfg} clocksource=hpet
-# use method= instad of repo= for CentOS 5
-iseq ${version} 5 && imgargs vmlinuz method=${mirror}/${dir} ${params} ||
 imgstat
 isset ${debug} && prompt ||
 boot vmlinuz
