@@ -8,7 +8,7 @@ goto ${menu}
 :ubuntu
 set mirror mirror.rackspace.com
 set os ubuntu
-set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/get_netmask=${netX/netmask} netcfg/get_gateway=${netX/gateway} netcfg/get_nameservers=${dns} netcfg/confirm_static=true netcfg/disable_autoconfig=true
+iseq ${manufacturer} Xen && set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/get_netmask=${netX/netmask} netcfg/get_gateway=${netX/gateway} netcfg/get_nameservers=${dns} netcfg/confirm_static=true netcfg/disable_autoconfig=true ||
 
 menu Ubuntu ${arch_a}
 item saucy Ubuntu 13.10 Saucy Salamander

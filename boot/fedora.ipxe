@@ -10,7 +10,7 @@ goto ${menu} ||
 :fedora
 set os Fedora
 menu Fedora ${arch}
-set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns}
+iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} ||
 item 20 ${os} 20
 item 19 ${os} 19
 item 18 ${os} 18
