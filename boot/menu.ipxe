@@ -36,7 +36,7 @@ item local ${space} Boot from local hdd
 
 item --gap Operating Systems:
 item linux ${space} Linux Operating Systems
-#item windows ${space} Windows Operating Systems
+item windows ${space} Windows Operating Systems
 item bsd ${space} BSD Operating Systems
 #item network ${space} Network Appliances 
 #item storage ${space} Storage Appliances
@@ -103,9 +103,9 @@ goto main_menu
 chain linux.ipxe
 goto main_menu
 
-#:windows
-#chain windows.ipxe
-#goto main_menu
+:windows
+chain windows.ipxe
+goto main_menu
 
 :bsd
 chain bsd.ipxe
