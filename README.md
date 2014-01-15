@@ -89,3 +89,7 @@ All iPXE boot images are regenerated every time a commit occurs to the [iPXE pro
 #### Updates to boot.rackspace.com menus
 
 Pull requests are welcome and encouraged.  Feel free to issue a pull request for new versions or tools that you might find useful.  boot.rackspace.com will be deployed automatically with the latest github changes once they've been accepted.
+
+#### Feedback
+
+Feel free to open up an issue on github or contact us via <bootrax@rackspace.com>.
