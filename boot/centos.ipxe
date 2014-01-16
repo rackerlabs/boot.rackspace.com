@@ -3,8 +3,6 @@
 # CentOS Operating System
 # http://www.centos.org
 
-set ksurl http://boot.rackspace.com/ks/
-
 goto ${menu} ||
 
 :centos
@@ -23,34 +21,23 @@ echo -n Enter version: ${} && read version
 :centos_skip_read_version
 set dir ${menu}/${version}/os/${arch}
 set repo repo=${mirror}/${dir}
-set osks ${ksurl}centos${version}
 goto boottype
 
 :boottype
 set ova ${os} ${version}
 menu ${os} ${arch} boot type
 item normal ${ova}
-#item ks ${ova} minimal server kickstart
 item rescue ${ova} rescue
 isset ${bt} || choose bt || goto centos
 echo ${cls}
-#iseq ${bt} ks && set params ksdevice=bootif ks=${osks} ${params} ||
-iseq ${bt} rescue && set params rescue ${params} ||
-goto bootos_${bt} ||
+iseq ${bt} rescue && set params rescue ||
 goto bootos_images
 
 :bootos_images
-echo Loading from ${mirror}/${dir}/isolinux/
-echo ${}  ${repo}
-echo ${}  ${params}
 imgfree
-# load vmlinuz and initrd
-kernel ${mirror}/${dir}/isolinux/vmlinuz
+kernel ${mirror}/${dir}/isolinux/vmlinuz ${repo} ${params} ${netcfg} clocksource=hpet
 initrd ${mirror}/${dir}/isolinux/initrd.img
-imgargs vmlinuz ${repo} ${params} ${netcfg} clocksource=hpet
-imgstat
-isset ${debug} && prompt ||
-boot vmlinuz
+boot
 goto linux_menu
 
 :linux_menu
