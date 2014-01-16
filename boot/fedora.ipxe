@@ -3,29 +3,19 @@
 # Fedora Operating System
 # http://wwww.fedora.org
 
-set ksurl http://boot.rackspace.com/ks/
-
 goto ${menu} ||
 
 :fedora
+clear version
 set os Fedora
 menu Fedora ${arch}
 iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} ksdevice=eth0 ||
 item 20 ${os} 20
 item 19 ${os} 19
 item 18 ${os} 18
-item 17 ${os} 17
-item 16 ${os} 16
 isset ${version} || choose version || goto linux_menu
-
-# workaround for fedora 17
-iseq ${version} 17 && set params rd.debug ${params} ||
-
-goto fedora_${version} ||
 set dir fedora/releases/${version}/${os}/${arch}/os
 set repo repo=${mirror}/${dir}
-:fedora_setvars
-set osks ${ksurl}fedora
 goto boottype
 
 :boottype
@@ -35,22 +25,14 @@ item normal ${ova}
 item rescue ${ova} rescue
 isset ${bt} || choose bt || goto fedora
 echo ${cls}
-iseq ${bt} rescue && set params rescue ${params} ||
-goto bootos_${bt} ||
+iseq ${bt} rescue && set params rescue ||
 goto bootos_images
 
 :bootos_images
-echo Loading from ${mirror}/${dir}/isolinux/
-echo ${}  ${repo}
-echo ${}  ${params}
 imgfree
-# load vmlinuz and initrd
-kernel ${mirror}/${dir}/isolinux/vmlinuz
+kernel ${mirror}/${dir}/isolinux/vmlinuz ${repo} ${params} ${netcfg}
 initrd ${mirror}/${dir}/isolinux/initrd.img
-imgargs vmlinuz ${repo} ${params} ${netcfg}
-imgstat
-isset ${debug} && prompt ||
-boot vmlinuz
+boot
 goto linux_menu
 
 :linux_menu
