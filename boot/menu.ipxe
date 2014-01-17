@@ -4,13 +4,6 @@
 set url http://boot.rackspace.com
 set mirror http://mirror.rackspace.com
 
-# Ensure we're running the proper version, not in use yet, stubbed out
-iseq ${boot_rackspace_version} 1 && goto version_ok ||
-echo
-echo IPXE version too old, rechaining ...
-chain --replace ${url}/ipxe/ipxe.kpxe ||
-:version_ok
-
 iseq ${cls} serial && goto ignore_cls ||
 set cls:hex 1b:5b:4a  # ANSI clear screen sequence - "^[[J"
 set cls ${cls:string}
