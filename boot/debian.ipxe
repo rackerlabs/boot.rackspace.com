@@ -25,6 +25,7 @@ menu ${os} boot parameters
 item install ${os} install
 item rescue ${os} rescue mode 
 item expert ${os} expert install
+item preseed ${os} specify preseed url
 choose --default ${type} type || goto debian
 
 echo ${cls}
@@ -34,8 +35,13 @@ goto deb_${type}
 set install_params rescue/enable=true
 goto deb_boot
 
-:dev_expert
+:deb_expert
 set install_params priority=low
+goto deb_boot
+
+:deb_preseed
+echo -n Specify custom Preseed URL: && read preseedurl
+set install_params preseed/url=${preseedurl}
 goto deb_boot
 
 :deb_install
