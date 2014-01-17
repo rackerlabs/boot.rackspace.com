@@ -23,9 +23,20 @@ set ova ${os} ${version}
 menu ${os} ${arch} boot type
 item normal ${ova}
 item rescue ${ova} rescue
+item kickstart ${ova} specify kickstart url
 isset ${bt} || choose bt || goto fedora
 echo ${cls}
-iseq ${bt} rescue && set params rescue ||
+iseq ${bt} rescue && goto rescue ||
+iseq ${bt} kickstart && goto kickstart ||
+goto bootos_images
+
+:rescue
+set params rescue ||
+goto bootos_images
+
+:kickstart
+echo -n Specify kickstart URL for ${os} ${version}: && read ksurl
+set params ks=${ksurl} ||
 goto bootos_images
 
 :bootos_images
