@@ -43,7 +43,7 @@ goto deb_boot
 
 :deb_preseed
 echo -n Specify custom Preseed URL: && read preseedurl
-set install_params preseed/url=${preseedurl}
+set install_params auto=true priority=critical preseed/url=${preseedurl}
 goto deb_boot
 
 :deb_install

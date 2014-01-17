@@ -1,4 +1,4 @@
-## boot.rackspace.com
+## boot.rackspace.com (preview)
 
 ### What is boot.rackspace.com?
 
