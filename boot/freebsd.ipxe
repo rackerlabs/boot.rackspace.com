@@ -5,11 +5,11 @@
 
 :freebsd_menu
 menu Please pick a FreeBSD version
-item 10.0 FreeBSD 10.0-BETA3
+item 10.0 FreeBSD 10.0
 item 9.2 FreeBSD 9.2
 choose ver || goto freebsd_exit
 
-iseq ${ver} 10.0 && set image_ver 10.0-BETA3 ||
+iseq ${ver} 10.0 && set image_ver 10.0-RELEASE ||
 iseq ${ver} 9.2 && set image_ver 9.2-RELEASE ||
 
 iseq ${arch} x86_64 && goto freebsd_x64 ||
