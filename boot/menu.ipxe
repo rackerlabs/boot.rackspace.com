@@ -30,11 +30,8 @@ item local ${space} Boot from local hdd
 item --gap Operating Systems:
 item linux ${space} Linux Operating Systems
 item bsd ${space} BSD Operating Systems
-#item network ${space} Network Appliances 
-#item storage ${space} Storage Appliances
 
 item --gap Tools:
-#item fwtools ${space} Baremetal Firmware Tools
 item utils ${space} Utilities
 item shell ${space} iPXE shell
 item netinfo ${space} Network card info
