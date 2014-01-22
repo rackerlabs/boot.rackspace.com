@@ -78,7 +78,6 @@ All iPXE boot images are regenerated every time a commit occurs to the [iPXE pro
 * OpenSUSE
 * TinyCoreLinux
 * Ubuntu
-* Windows 2012 Preinstallation Environment [Experimental, boots but network doesn't work currently, on todo list]
 
 #### What Utilities are currently available on boot.rackspace.com?
 
