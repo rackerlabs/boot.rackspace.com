@@ -7,7 +7,7 @@ boot.rackspace.com is a collection of iPXE scripts that allow you to rapidly net
 ### Getting started
 #### Boot from Rackspace Cloud Servers
 
-Each region in Rackspace Cloud Servers contains an image called "boot.rackspace.com".  When creating a new Performance Flavor instance (does not currently work on Standard Flavors), specify this image as the image to boot from, select the size of the instance you want, and then boot.  The instance creation will attach a small 1MB iPXE iso to the instance and boot from it.  
+Each region in Rackspace Cloud Servers contains an [image](https://github.com/rackerlabs/boot.rackspace.com/wiki/boot.rackspace.com-Image-UUIDs) named "boot.rackspace.com".  When creating a new Performance Flavor instance (does not currently work on Standard Flavors), specify this image as the image to boot from, select the size of the instance you want, and then boot.  The instance creation will attach a small 1MB iPXE iso to the instance and boot from it.  
 
 Once you've booted the instance, you can attach to it with the console.  The networking information of the instance is automatically set so you should drop right into the menu.  In the event automation fails, you'll be prompted for the networking information of the instance.
 
