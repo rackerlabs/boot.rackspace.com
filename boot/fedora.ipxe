@@ -6,20 +6,20 @@
 goto ${menu} ||
 
 :fedora
-clear version
+clear osversion
 set os Fedora
 menu Fedora ${arch}
 iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} ksdevice=eth0 ||
 item 20 ${os} 20
 item 19 ${os} 19
 item 18 ${os} 18
-isset ${version} || choose version || goto linux_menu
-set dir fedora/releases/${version}/${os}/${arch}/os
+isset ${osversion} || choose osversion || goto linux_menu
+set dir fedora/releases/${osversion}/${os}/${arch}/os
 set repo repo=${mirror}/${dir}
 goto boottype
 
 :boottype
-set ova ${os} ${version}
+set ova ${os} ${osversion}
 menu ${os} ${arch} boot type
 item normal ${ova}
 item rescue ${ova} rescue
@@ -35,7 +35,7 @@ set params rescue ||
 goto bootos_images
 
 :kickstart
-echo -n Specify kickstart URL for ${os} ${version}: && read ksurl
+echo -n Specify kickstart URL for ${os} ${osversion}: && read ksurl
 set params ks=${ksurl} ||
 goto bootos_images
 
