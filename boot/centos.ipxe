@@ -6,7 +6,7 @@
 goto ${menu} ||
 
 :centos
-clear version
+clear osversion
 set os CentOS
 iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} ksdevice=eth0 ||
 menu ${os} ${arch}
@@ -14,17 +14,17 @@ item 6.5 ${os} 6.5
 item 6.4 ${os} 6.4
 item 6.3 ${os} 6.3
 item other Choose other version [o]
-isset ${version} || choose version || goto linux_menu
-iseq ${version} other || goto centos_skip_read_version
+isset ${osversion} || choose osversion || goto linux_menu
+iseq ${osversion} other || goto centos_skip_read_osversion
 echo ${cls}
-echo -n Enter version: ${} && read version
-:centos_skip_read_version
-set dir ${menu}/${version}/os/${arch}
+echo -n Enter version: ${} && read osversion
+:centos_skip_read_osversion
+set dir ${menu}/${osversion}/os/${arch}
 set repo repo=${mirror}/${dir}
 goto boottype
 
 :boottype
-set ova ${os} ${version}
+set ova ${os} ${osversion}
 menu ${os} ${arch} boot type
 item normal ${ova}
 item rescue ${ova} rescue
@@ -40,7 +40,7 @@ set params rescue ||
 goto bootos_images
 
 :kickstart
-echo -n Specify kickstart URL for ${os} ${version}: && read ksurl
+echo -n Specify kickstart URL for ${os} ${osversion}: && read ksurl
 set params ks=${ksurl} ||
 goto bootos_images
 
