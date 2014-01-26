@@ -3,22 +3,29 @@
 # Gentoo Operating System
 # http://www.gentoo.org
 
-set default_version 20140116
+# Note: in order to boot Gentoo via iPXE, the method at http://blog.dastrup.com/?p=12 has been utilized to 
+# to allow for the Gentoo minimal disk to boot.  I've regenerated the latest boot disks and have put
+# them on boot.rackspace.com so that you can boot into the live cd
 
-iseq ${arch} x86_64 && set gt_arch amd64 || set gt_arch x86
+goto ${menu}
 
-echo For Gentoo you need ISO image version number.
-echo See this link for latest build version:
-echo http://distfiles.gentoo.org/releases/${gt_arch}/autobuilds/current-iso/
-echo Example: ${default_version}
+:gentoo
+set os gentoo
+menu Gentoo ${arch_a}
+item 20140116 Gentoo minimal CD version - 20140116
+choose version || goto gentoo_exit
+goto ${version}
 
-echo -n Enter version: ${} && read version
+:20140116
+set gentoopath http://boot.rackspace.com/distros/gentoo/amd64/20140116
+echo Please note the gentoo ISO has been regenerated to work with iPXE
+echo using the method here: http://blog.dastrup.com/?p=12
+echo You will need to set up networking manually.
+kernel ${gentoopath}/gentoo initrd=gentoo.igz root=/dev/ram0 init=/linuxrc loop=/image.squashfs looptype=squashfs cdroot=1 real_root=/ dokeymap vga=791 nodhcp
+initrd ${gentoopath}/gentoo.igz
+boot
+goto gentoo
 
-isset ${version} || set version ${default_version}
-
-set mirror http://mirror.rackspace.com/gentoo/
-set dir releases/${gt_arch}/autobuilds/current-iso/
-set iso install-${gt_arch}-minimal-${version}.iso
-
-initrd ${mirror}${dir}${iso}
-chain memdisk iso
+:gentoo_exit
+clear menu
+chain linux.ipxe
