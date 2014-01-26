@@ -3,7 +3,7 @@
 # Gentoo Operating System
 # http://www.gentoo.org
 
-set default_version 20130411
+set default_version 20140116
 
 iseq ${arch} x86_64 && set gt_arch amd64 || set gt_arch x86
 
