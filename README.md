@@ -76,6 +76,7 @@ All iPXE boot images are regenerated every time a commit occurs to the [iPXE pro
 * Gentoo
 * OpenBSD
 * OpenSUSE
+* Scientific
 * TinyCoreLinux
 * Ubuntu
 
