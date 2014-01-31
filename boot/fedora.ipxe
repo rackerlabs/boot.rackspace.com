@@ -15,7 +15,7 @@ item 19 ${os} 19
 item 18 ${os} 18
 isset ${osversion} || choose osversion || goto linux_menu
 set dir fedora/releases/${osversion}/${os}/${arch}/os
-set repo repo=${mirror}/${dir}
+set repo http://${mirror}/${dir}
 goto boottype
 
 :boottype
@@ -41,8 +41,8 @@ goto bootos_images
 
 :bootos_images
 imgfree
-kernel ${mirror}/${dir}/isolinux/vmlinuz ${repo} ${params} ${netcfg}
-initrd ${mirror}/${dir}/isolinux/initrd.img
+kernel http://${mirror}/${dir}/isolinux/vmlinuz repo=${repo} ${params} ${netcfg}
+initrd http://${mirror}/${dir}/isolinux/initrd.img
 boot
 goto linux_menu
 

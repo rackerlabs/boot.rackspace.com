@@ -12,14 +12,13 @@ item 11.4 openSUSE 11.4
 item factory-tested openSUSE factory-tested
 choose version || goto opensuse_exit
 
-set mirror http://mirror.rackspace.com/opensuse/
-set dir distribution/${version}/repo/oss/
+set dir opensuse/distribution/${version}/repo/oss
 iseq ${version} factory-tested && set dir ${version}/repo/oss/ ||
 
 imgfree
-kernel ${mirror}${dir}boot/${arch}/loader/linux
-initrd ${mirror}${dir}boot/${arch}/loader/initrd
-imgargs linux netsetup=dhcp install=${mirror}${dir} ${params} ${netcfg}
+kernel http://${mirror}/${dir}/boot/${arch}/loader/linux
+initrd http://${mirror}/${dir}/boot/${arch}/loader/initrd
+imgargs linux netsetup=dhcp install=http://${mirror}/${dir} ${params} ${netcfg}
 boot
 
 :opensuse_exit

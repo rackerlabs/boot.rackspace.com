@@ -1,6 +1,5 @@
 #!ipxe
 
-set memdisk http://boot.rackspace.com/memdisk
 menu Utilities
 item --gap Utilities:
 item clonezilla ${space} Clonezilla

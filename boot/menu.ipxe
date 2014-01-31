@@ -1,8 +1,8 @@
 #!ipxe
 
 :start
-set url http://boot.rackspace.com
-set mirror http://mirror.rackspace.com
+
+chain --autofree boot.cfg ||
 
 iseq ${cls} serial && goto ignore_cls ||
 set cls:hex 1b:5b:4a  # ANSI clear screen sequence - "^[[J"
@@ -22,7 +22,7 @@ set space:hex 20:20
 set space ${space:string}
 iseq ${arch} i386 && set arch5 i586 || set arch5 ${arch}
 iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
-menu boot.rackspace.com [Local IP: ${netX/ip}]
+menu ${boot_domain} [Local IP: ${netX/ip}]
 
 item --gap Default:
 item local ${space} Boot from local hdd

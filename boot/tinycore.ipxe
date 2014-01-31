@@ -3,7 +3,7 @@
 # TinyCoreLinux
 # http://distro.ibiblio.org/tinycorelinux/downloads.html
 
-set mirror http://distro.ibiblio.org/tinycorelinux/
+set mirror distro.ibiblio.org/tinycorelinux
 
 :tinycore_menu
 set dir 4.x/x86/release
@@ -15,8 +15,8 @@ choose version || goto tinycore_exit
 
 echo ${cls}
 
-kernel ${url}memdisk iso raw ${params}
-initrd ${mirror}${dir}/${version}-current.iso
+kernel ${memdisk} iso raw ${params}
+initrd http://${mirror}/${dir}/${version}-current.iso
 boot
 
 :tinycore_exit
