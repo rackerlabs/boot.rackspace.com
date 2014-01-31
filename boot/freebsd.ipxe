@@ -24,7 +24,7 @@ goto boot_freebsd
 set src http://ftp.freebsd.org/pub/FreeBSD/releases/${freebsd_arch}/${freebsd_arch}/ISO-IMAGES/${ver}/FreeBSD-${image_ver}-${freebsd_arch}-bootonly.iso
 imgfree
 initrd ${src}
-chain http://boot.rackspace.com/memdisk iso raw
+chain ${memdisk} iso raw
 exit
 
 :freebsd_exit

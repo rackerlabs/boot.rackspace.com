@@ -5,7 +5,7 @@
 
 # Note: in order to boot Gentoo via iPXE, the method at http://blog.dastrup.com/?p=12 has been utilized to 
 # to allow for the Gentoo minimal disk to boot.  I've regenerated the latest boot disks and have put
-# them on boot.rackspace.com so that you can boot into the live cd
+# them on ${boot_domain} so that you can boot into the live cd
 
 goto ${menu}
 
@@ -17,7 +17,7 @@ choose version || goto gentoo_exit
 goto ${version}
 
 :20140116
-set gentoopath http://boot.rackspace.com/distros/gentoo/amd64/20140116
+set gentoopath http://${boot_domain}/distros/gentoo/amd64/20140116
 echo Please note the gentoo ISO has been regenerated to work with iPXE
 echo using the method here: http://blog.dastrup.com/?p=12
 echo You will need to set up networking manually.

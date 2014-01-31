@@ -20,7 +20,7 @@ echo ${cls}
 echo -n Enter version: ${} && read osversion
 :centos_skip_read_osversion
 set dir ${menu}/${osversion}/os/${arch}
-set repo repo=${mirror}/${dir}
+set repo http://${mirror}/${dir}
 goto boottype
 
 :boottype
@@ -46,8 +46,8 @@ goto bootos_images
 
 :bootos_images
 imgfree
-kernel ${mirror}/${dir}/isolinux/vmlinuz ${repo} ${params} ${netcfg} clocksource=hpet
-initrd ${mirror}/${dir}/isolinux/initrd.img
+kernel http://${mirror}/${dir}/isolinux/vmlinuz repo=${repo} ${params} ${netcfg} clocksource=hpet
+initrd http://${mirror}/${dir}/isolinux/initrd.img
 boot
 goto linux_menu
 
