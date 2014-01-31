@@ -12,6 +12,7 @@ item --gap RPM Based Operating Systems
 item centos ${space} CentOS 
 item fedora ${space} Fedora
 item opensuse ${space} openSUSE
+item scientific ${space} Scientific
 
 # Deb based systems
 item --gap Debian Based Operating Systems
@@ -65,4 +66,8 @@ goto linux_menu
 
 :opensuse
 chain opensuse.ipxe
+goto linux_menu
+
+:scientific
+chain scientific.ipxe
 goto linux_menu
