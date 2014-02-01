@@ -55,10 +55,6 @@ or
 
 where sdX is your usb drive.  Substitute /dev/sdX for /dev/fd0 in the case of using a floppy.
 
-#### Updates to boot.rackspace.com menus
-
-Pull requests are welcome and encouraged.  Feel free to issue a pull request for new versions or tools that you might find useful.  boot.rackspace.com will be deployed automatically with the latest github changes once they've been accepted.
-
 #### iPXE Images
 
 All iPXE boot images are regenerated every time a commit occurs to the [iPXE project on Github](https://github.com/ipxe/ipxe) so that the images always have the latest and greatest updates.  It's merged with the [osimages branch](https://github.com/amesserl/ipxe/tree/osimages) with the only deviations right now being the menu [color scheme](https://github.com/amesserl/ipxe/blob/osimages/src/config/colour.h).
