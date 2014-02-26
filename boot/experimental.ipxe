@@ -1,0 +1,19 @@
+#!ipxe
+
+menu Experimental Operating Systems
+item --gap Experimental:
+item boot2docker ${space} boot2docker v0.6.0
+choose --default ${menu} menu || goto experimental_exit
+echo ${cls}
+goto ${menu} ||
+chain ${menu}.ipxe || goto error
+goto experimental_exit
+
+:boot2docker
+sanboot http://boot.rackspace.com/distros/boot2docker/v0.6.0/boot2docker.iso
+goto experimental_exit
+
+:experimental_exit
+clear menu
+chain menu.ipxe
+exit 0

@@ -30,6 +30,7 @@ item local ${space} Boot from local hdd
 item --gap Operating Systems:
 item linux ${space} Linux Operating Systems
 item bsd ${space} BSD Operating Systems
+item experimental ${space} Experimental Operating Systems
 
 item --gap Tools:
 item utils ${space} Utilities
@@ -96,12 +97,8 @@ goto main_menu
 chain bsd.ipxe
 goto main_menu
 
-:network
-chain network.ipxe
-goto main_menu
-
-:storage
-chain storage.ipxe
+:experimental
+chain experimental.ipxe
 goto main_menu
 
 :utils
