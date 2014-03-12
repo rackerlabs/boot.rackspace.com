@@ -10,7 +10,9 @@ chain ${menu}.ipxe || goto error
 goto experimental_exit
 
 :boot2docker
-sanboot http://boot.rackspace.com/distros/boot2docker/v0.6.0/boot2docker.iso
+kernel ${memdisk} iso raw
+initrd http://boot.rackspace.com/distros/boot2docker/v0.6.0/boot2docker.iso
+boot
 goto experimental_exit
 
 :experimental_exit
