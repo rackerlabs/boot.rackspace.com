@@ -10,6 +10,7 @@ set os ubuntu
 iseq ${manufacturer} Xen && set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/get_netmask=${netX/netmask} netcfg/get_gateway=${netX/gateway} netcfg/get_nameservers=${dns} netcfg/confirm_static=true netcfg/choose_interface=eth0 netcfg/disable_autoconfig=true ||
 
 menu Ubuntu ${arch_a}
+item trusty Ubuntu 14.04 LTS Trusty Tahr
 item saucy Ubuntu 13.10 Saucy Salamander
 item raring Ubuntu 13.04 Raring Ringtail
 item quantal Ubuntu 12.10 Quantal Quetzal
