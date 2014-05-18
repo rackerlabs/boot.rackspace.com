@@ -3,6 +3,7 @@
 menu Experimental Operating Systems
 item --gap Experimental:
 item boot2docker ${space} boot2docker v0.6.0
+item coreos-beta ${space} CoreOS Latest Beta Channel
 choose --default ${menu} menu || goto experimental_exit
 echo ${cls}
 goto ${menu} ||
@@ -14,6 +15,18 @@ kernel ${memdisk} iso raw
 initrd http://boot.rackspace.com/distros/boot2docker/v0.6.0/boot2docker.iso
 boot
 goto experimental_exit
+
+:coreos-beta
+set coreos-version beta
+set base-url http://storage.core-os.net/coreos/amd64-usr/${coreos-version}
+echo This will currently autologin into tty1 on the console.
+echo From there you can su to root and install CoreOS to disk using:
+echo coreos-install -d /dev/sda
+echo You will probably need to chroot into /dev/sda9 to configure accounts.
+echo More info @ http://coreos.com/docs/running-coreos/bare-metal/installing-to-disk/
+kernel ${base-url}/coreos_production_pxe.vmlinuz coreos pxe demo console=tty1 coreos.autologin=tty1
+initrd ${base-url}/coreos_production_pxe_image.cpio.gz
+boot
 
 :experimental_exit
 clear menu
