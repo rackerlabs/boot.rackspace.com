@@ -79,7 +79,8 @@ All iPXE boot images are regenerated every time a commit occurs to the [iPXE pro
 #### Experimental Operating Systems
 
 * [boot2docker](https://github.com/boot2docker/boot2docker)
-
+* [CoreOS](https://coreos.com/)
+* 
 #### What Utilities are currently available on boot.rackspace.com?
 
 * [Clonezilla](http://www.clonezilla.org/)
