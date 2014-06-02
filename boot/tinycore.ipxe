@@ -4,7 +4,7 @@
 # http://tinycorelinux.net/downloads.html
 # For now there is only one menu entry
 
-set tinycorelinux.net
+set mirror tinycorelinux.net
 
 :tinycore_menu
 set dir 5.x/x86/release
