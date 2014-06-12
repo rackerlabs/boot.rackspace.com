@@ -50,7 +50,9 @@ goto boottype
 
 :kickstart_device
 echo -n Specify ksdevice param for ${os} ${osversion}: && read ksdevice
-set ksdevice ${ksdevice} ||
+echo -n Specify kickstart URL for ${os} ${osversion}: && read ksurl
+set params ks=${ksurl} ||
+set params ksdevice=${ksdevice} ||
 clear bt
 goto boottype
 
