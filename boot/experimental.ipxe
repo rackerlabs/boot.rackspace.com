@@ -2,7 +2,7 @@
 
 menu Experimental Operating Systems
 item --gap Experimental:
-item boot2docker ${space} boot2docker v0.6.0
+item boot2docker ${space} boot2docker v1.0.0
 item coreos-beta ${space} CoreOS Latest Beta Channel
 choose --default ${menu} menu || goto experimental_exit
 echo ${cls}
@@ -12,7 +12,7 @@ goto experimental_exit
 
 :boot2docker
 kernel ${memdisk} iso raw
-initrd http://boot.rackspace.com/distros/boot2docker/v0.6.0/boot2docker.iso
+initrd http://boot.rackspace.com/distros/boot2docker/v1.0.0/boot2docker.iso
 boot
 goto experimental_exit
 
