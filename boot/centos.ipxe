@@ -35,6 +35,7 @@ isset ${bt} || choose bt || goto centos
 echo ${cls}
 iseq ${bt} rescue && goto rescue ||
 iseq ${bt} kickstart && goto kickstart ||
+iseq ${bt} kickstart_device && goto kickstart_device ||
 goto bootos_images
 
 :rescue
@@ -48,7 +49,8 @@ goto bootos_images
 
 :kickstart_device
 echo -n Specify ksdevice param for ${os} ${osversion}: && read ksdevice
-set ksdevice=${ksdevice}
+set ksdevice ${ksdevice} ||
+clear bt
 goto boottype
 
 :bootos_images
