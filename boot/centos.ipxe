@@ -8,7 +8,8 @@ goto ${menu} ||
 :centos
 clear osversion
 set os CentOS
-iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} ksdevice=eth0 ||
+set ksdevice eth0
+iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} ||
 menu ${os} ${arch}
 item 6.5 ${os} 6.5
 item 6.4 ${os} 6.4
@@ -29,6 +30,7 @@ menu ${os} ${arch} boot type
 item normal ${ova}
 item rescue ${ova} rescue
 item kickstart ${ova} specify kickstart url
+item kickstart_device ${ova} specify ksdevice ( currently set to ksdevice=${ksdevice} )
 isset ${bt} || choose bt || goto centos
 echo ${cls}
 iseq ${bt} rescue && goto rescue ||
@@ -44,9 +46,14 @@ echo -n Specify kickstart URL for ${os} ${osversion}: && read ksurl
 set params ks=${ksurl} ||
 goto bootos_images
 
+:kickstart_device
+echo -n Specify ksdevice param for ${os} ${osversion}: && read ksdevice
+set ksdevice=${ksdevice}
+goto boottype
+
 :bootos_images
 imgfree
-kernel http://${mirror}/${dir}/isolinux/vmlinuz repo=${repo} ${params} ${netcfg} clocksource=hpet
+kernel http://${mirror}/${dir}/isolinux/vmlinuz repo=${repo} ${params} ${netcfg} ksdevice=${ksdevice} clocksource=hpet
 initrd http://${mirror}/${dir}/isolinux/initrd.img
 boot
 goto linux_menu
