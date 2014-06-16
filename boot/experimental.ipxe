@@ -4,6 +4,8 @@ menu Experimental Operating Systems
 item --gap Experimental:
 item boot2docker ${space} boot2docker v1.0.0
 item coreos-beta ${space} CoreOS Latest Beta Channel
+item centos7 ${space} CentOS 7 Testing Build
+
 choose --default ${menu} menu || goto experimental_exit
 echo ${cls}
 goto ${menu} ||
@@ -27,6 +29,13 @@ echo More info @ http://coreos.com/docs/running-coreos/bare-metal/installing-to-
 kernel ${base-url}/coreos_production_pxe.vmlinuz coreos pxe demo console=tty1 coreos.autologin=tty1
 initrd ${base-url}/coreos_production_pxe_image.cpio.gz
 boot
+goto experimental_exit
+
+:centos7
+kernel http://buildlogs.centos.org/centos/7/os/x86_64-20140614/images/pxeboot/vmlinuz
+initrd http://buildlogs.centos.org/centos/7/os/x86_64-20140614/images/pxeboot/initrd.img
+boot
+goto experimental_exit
 
 :experimental_exit
 clear menu
