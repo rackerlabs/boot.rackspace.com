@@ -32,8 +32,9 @@ boot
 goto experimental_exit
 
 :centos7
-kernel http://buildlogs.centos.org/centos/7/os/x86_64-20140614/images/pxeboot/vmlinuz
-initrd http://buildlogs.centos.org/centos/7/os/x86_64-20140614/images/pxeboot/initrd.img
+kernel http://buildlogs.centos.org/centos/7/os/x86_64-latest/images/pxeboot/vmlinuz
+initrd http://buildlogs.centos.org/centos/7/os/x86_64-latest/images/pxeboot/initrd.img
+imgargs vmlinuz repo=http://buildlogs.centos.org/centos/7/os/x86_64-latest
 boot
 goto experimental_exit
 
