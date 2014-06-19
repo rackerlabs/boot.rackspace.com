@@ -21,7 +21,8 @@ set mirrorcfg mirror/suite=${version} mirror/country=manual mirror/http/hostname
 set dir ${os}/dists/${version}/main/installer-${arch_a}/current/images/netboot/
 
 menu ${os} boot parameters
-item install ${os} install
+item text ${os} text based install
+item graphical ${os} graphical based install
 item rescue ${os} rescue mode 
 item expert ${os} expert install
 item preseed ${os} specify preseed url
@@ -32,20 +33,27 @@ goto deb_${type}
 
 :deb_rescue
 set install_params rescue/enable=true
-goto deb_boot
+goto deb_text
 
 :deb_expert
 set install_params priority=low
-goto deb_boot
+goto deb_text
 
 :deb_preseed
 echo -n Specify preseed URL for ${os} ${version}: && read preseedurl
 set install_params auto=true priority=critical preseed/url=${preseedurl}
+goto deb_text
+
+:deb_text
+set dir ${dir}${menu}-installer/${arch_a}
 goto deb_boot
 
-:deb_install
+:deb_graphical
+set dir ${dir}gtk/${menu}-installer/${arch_a}
+set install_params vga=788
+goto deb_boot
+
 :deb_boot
-set dir ${dir}${menu}-installer/${arch_a}
 imgfree
 echo Boot parameters: ${install_params} -- quiet ${params}
 kernel http://${mirror}/${dir}/linux ${install_params} ${netcfg} ${mirrorcfg} -- quiet ${params}
