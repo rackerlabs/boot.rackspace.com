@@ -3,6 +3,9 @@
 # Ubuntu Operating System
 # http://www.ubuntu.org
 
+# Ubuntu expects "amd64" string for 64-bit systems
+iseq ${arch} x64 && set arch_a amd64 || set arch_a ${arch}
+
 goto ${menu}
 
 :ubuntu
@@ -16,8 +19,13 @@ item quantal Ubuntu 12.10 Quantal Quetzal
 item precise Ubuntu 12.04 LTS Precise Pangolin
 item oneiric Ubuntu 11.10 Oneiric Ocelot
 item natty Ubuntu 11.04 Natty Narwhal
+item writeinversion Provide your own Ubuntu release version
 choose version || goto ubuntu_exit
 set mirrorcfg mirror/suite=${version} mirror/country=manual mirror/http/hostname=${mirror} mirror/http/directory=/${os}
+
+:writeinversion
+echo -n Specify Ubuntu release version name: && read version_name
+set version ${version_name}
 
 :deb_boot_type
 set dir ${os}/dists/${version}/main/installer-${arch_a}/current/images/netboot/
