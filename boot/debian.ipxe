@@ -3,9 +3,6 @@
 # Debian Operating System
 # http://www.debian.org
 
-# Debian expects "amd64" string for 64-bit systems
-iseq ${arch} x64 && set arch_a amd64 || set arch_a ${arch}
-
 goto ${menu}
 
 :debian
