@@ -13,8 +13,6 @@ iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gat
 menu ${os} ${arch}
 item 7 ${os} 7
 item 6.5 ${os} 6.5
-item 6.4 ${os} 6.4
-item 6.3 ${os} 6.3
 item other Choose other version [o]
 isset ${osversion} || choose osversion || goto linux_menu
 iseq ${osversion} other || goto centos_skip_read_osversion
@@ -57,8 +55,8 @@ goto boottype
 
 :bootos_images
 imgfree
-kernel http://${mirror}/${dir}/isolinux/vmlinuz repo=${repo} ${params} ${netcfg} ksdevice=${ksdevice} clocksource=hpet
-initrd http://${mirror}/${dir}/isolinux/initrd.img
+kernel http://${mirror}/${dir}/images/pxeboot/vmlinuz repo=${repo} ${params} ${netcfg} ksdevice=${ksdevice} clocksource=hpet
+initrd http://${mirror}/${dir}/images/pxeboot/initrd.img
 boot
 goto linux_menu
 
