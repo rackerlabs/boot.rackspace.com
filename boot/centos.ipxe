@@ -43,7 +43,7 @@ goto bootos_images
 
 :kickstart
 echo -n Specify kickstart URL for ${os} ${osversion}: && read ksurl
-set params ks=${ksurl} ||
+set params ks=${ksurl} ksdevice=${ksdevice} ||
 clear bt
 goto boottype
 
@@ -55,7 +55,7 @@ goto boottype
 
 :bootos_images
 imgfree
-kernel http://${mirror}/${dir}/images/pxeboot/vmlinuz repo=${repo} ${params} ${netcfg} ksdevice=${ksdevice}
+kernel http://${mirror}/${dir}/images/pxeboot/vmlinuz repo=${repo} ${params} ${netcfg}
 initrd http://${mirror}/${dir}/images/pxeboot/initrd.img
 boot
 goto linux_menu
