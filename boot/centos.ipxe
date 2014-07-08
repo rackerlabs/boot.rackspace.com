@@ -57,7 +57,6 @@ goto boottype
 
 :bootos_images
 imgfree
-set mirror mirror.centos.org
 kernel http://${mirror}/${dir}/isolinux/vmlinuz repo=${repo} ${params} ${netcfg} ksdevice=${ksdevice} clocksource=hpet
 initrd http://${mirror}/${dir}/isolinux/initrd.img
 boot
