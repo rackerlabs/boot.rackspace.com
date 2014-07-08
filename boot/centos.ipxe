@@ -11,6 +11,7 @@ set os CentOS
 set ksdevice eth0
 iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} ||
 menu ${os} ${arch}
+item 7 ${os} 7
 item 6.5 ${os} 6.5
 item 6.4 ${os} 6.4
 item 6.3 ${os} 6.3
@@ -56,6 +57,7 @@ goto boottype
 
 :bootos_images
 imgfree
+set mirror mirror.centos.org
 kernel http://${mirror}/${dir}/isolinux/vmlinuz repo=${repo} ${params} ${netcfg} ksdevice=${ksdevice} clocksource=hpet
 initrd http://${mirror}/${dir}/isolinux/initrd.img
 boot
