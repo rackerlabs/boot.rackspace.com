@@ -55,7 +55,7 @@ goto boottype
 
 :bootos_images
 imgfree
-kernel http://${mirror}/${dir}/images/pxeboot/vmlinuz repo=${repo} ${params} ${netcfg} ksdevice=${ksdevice} clocksource=hpet
+kernel http://${mirror}/${dir}/images/pxeboot/vmlinuz repo=${repo} ${params} ${netcfg} ksdevice=${ksdevice}
 initrd http://${mirror}/${dir}/images/pxeboot/initrd.img
 boot
 goto linux_menu
