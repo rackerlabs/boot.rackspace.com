@@ -9,7 +9,7 @@ iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
 
 # RPM based systems
 item --gap RPM Based Operating Systems
-item centos ${space} CentOS 
+item centos ${space} CentOS
 item fedora ${space} Fedora
 item opensuse ${space} openSUSE
 item scientific ${space} Scientific
@@ -34,7 +34,7 @@ item --gap Options:
 iseq ${arch} x86_64 && set bits 64 || set bits 32
 item changebits ${space} Architecture: ${arch} (${bits}bit)
 
-choose menu || goto linux_exit
+isset os && set menu ${os} || choose menu || goto linux_exit
 echo ${cls}
 goto ${menu} ||
 chain ${menu}.ipxe || goto error
