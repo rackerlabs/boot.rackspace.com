@@ -6,7 +6,6 @@
 goto ${menu} ||
 
 :debian
-set mirror mirror.rackspace.com
 set os debian
 set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/get_netmask=${netX/netmask} netcfg/get_gateway=${netX/gateway} netcfg/get_nameservers=${dns} netcfg/confirm_static=true netcfg/disable_autoconfig=true ||
 
@@ -60,7 +59,7 @@ goto deb_boot
 set dir ${dir}${menu}-installer/${arch_a}
 imgfree
 echo Boot parameters: ${install_params} -- quiet ${params}
-kernel http://${mirror}/${dir}/linux ${netcfg} ${install_params} ${mirrorcfg} -- quiet
+kernel http://${mirror}/${dir}/linux ${netcfg} ${install_params} ${mirrorcfg} -- quiet ${params}
 initrd http://${mirror}/${dir}/initrd.gz
 boot
 
@@ -69,7 +68,7 @@ set install_params vga=788
 set dir ${dir}gtk/${menu}-installer/${arch_a}
 imgfree
 echo Boot parameters: ${install_params} -- quiet ${params}
-kernel http://${mirror}/${dir}/linux ${install_params} ${netcfg} ${mirrorcfg} -- quiet
+kernel http://${mirror}/${dir}/linux ${install_params} ${netcfg} ${mirrorcfg} -- quiet ${params}
 initrd http://${mirror}/${dir}/initrd.gz
 boot
 
