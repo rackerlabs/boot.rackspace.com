@@ -3,12 +3,14 @@
 # Ubuntu Operating System
 # http://www.ubuntu.org
 
-goto ${menu}
+goto ${menu} ||
 
 :ubuntu
+set mirror mirror.rackspace.com
 set os ubuntu
 iseq ${manufacturer} Xen && set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/get_netmask=${netX/netmask} netcfg/get_gateway=${netX/gateway} netcfg/get_nameservers=${dns} netcfg/confirm_static=true netcfg/choose_interface=eth0 netcfg/disable_autoconfig=true ||
 
+isset ${kickstarturl} && isset ${ver} && goto mirrorconfig ||
 menu Ubuntu ${arch_a}
 item saucy Ubuntu 13.10 Saucy Salamander
 item raring Ubuntu 13.04 Raring Ringtail
@@ -17,21 +19,26 @@ item precise Ubuntu 12.04 LTS Precise Pangolin
 item oneiric Ubuntu 11.10 Oneiric Ocelot
 item natty Ubuntu 11.04 Natty Narwhal
 item writeinversion Provide your own Ubuntu release version
-choose version || goto ubuntu_exit
-set mirrorcfg mirror/suite=${version} mirror/country=manual mirror/http/hostname=${mirror} mirror/http/directory=/${os}
+choose ver || goto ubuntu_exit
+iseq ${ver} writeinversion || goto mirrorconfig
 
 :writeinversion
 echo -n Specify Ubuntu release version name: && read version_name
-set version ${version_name}
+set ver ${version_name}
+
+:mirrorconfig
+set mirrorcfg mirror/suite=${ver} mirror/country=manual mirror/http/hostname=${mirror} mirror/http/directory=/${os}
 
 :deb_boot_type
-set dir ${os}/dists/${version}/main/installer-${arch_a}/current/images/netboot/
+set dir ${os}/dists/${ver}/main/installer-${arch_a}/current/images/netboot/
 
+isset ${kickstarturl} && isset ${type} && goto deb_${type} ||
 menu ${os} boot parameters
 item install ${os} install
 item rescue ${os} rescue mode
 item expert ${os} expert install
 item preseed ${os} specify preseed url
+item kickstart ${os} specify kickstart url
 choose --default ${type} type || goto ubuntu
 
 echo ${cls}
@@ -46,8 +53,14 @@ set install_params priority=low
 goto deb_boot
 
 :deb_preseed
-echo -n Specify preseed URL for ${os} ${version}: && read preseedurl
+echo -n Specify preseed URL for ${os} ${ver}: && read preseedurl
 set install_params auto=true priority=critical preseed/url=${preseedurl}
+goto deb_boot
+
+:deb_kickstart
+isset ${kickstarturl} && set netcfg ${nefcfg} netcfg/get_hostname=unassigned-hostname netcfg/get_domain=unassigned-domain || echo -n Specify kickstart URL for ${os} ${ver}:
+isset ${kickstarturl} || read kickstarturl  # unattended
+set install_params ksdevice=eth0 ks=${kickstarturl}
 goto deb_boot
 
 :deb_install
@@ -55,7 +68,7 @@ goto deb_boot
 set dir ${dir}${menu}-installer/${arch_a}
 imgfree
 echo Boot parameters: ${install_params} -- quiet ${params}
-kernel http://${mirror}/${dir}/linux ${install_params} ${netcfg} ${mirrorcfg} -- quiet ${params}
+kernel http://${mirror}/${dir}/linux ${netcfg} ${install_params} ${mirrorcfg} -- quiet ${params}
 initrd http://${mirror}/${dir}/initrd.gz
 boot
 

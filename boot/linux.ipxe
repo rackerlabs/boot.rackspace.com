@@ -1,5 +1,6 @@
 #!ipxe
 
+isset os && set menu ${os}
 goto ${menu} ||
 
 :linux_menu
@@ -34,7 +35,7 @@ item --gap Options:
 iseq ${arch} x86_64 && set bits 64 || set bits 32
 item changebits ${space} Architecture: ${arch} (${bits}bit)
 
-isset os && set menu ${os} || choose menu || goto linux_exit
+choose menu || goto linux_exit
 echo ${cls}
 goto ${menu} ||
 chain ${menu}.ipxe || goto error

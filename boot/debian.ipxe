@@ -3,28 +3,34 @@
 # Debian Operating System
 # http://www.debian.org
 
-goto ${menu}
+goto ${menu} ||
 
 :debian
+set mirror mirror.rackspace.com
 set os debian
-iseq ${manufacturer} Xen && set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/get_netmask=${netX/netmask} netcfg/get_gateway=${netX/gateway} netcfg/get_nameservers=${dns} netcfg/confirm_static=true netcfg/choose_interface=eth0 netcfg/disable_autoconfig=true ||
+set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/get_netmask=${netX/netmask} netcfg/get_gateway=${netX/gateway} netcfg/get_nameservers=${dns} netcfg/confirm_static=true netcfg/disable_autoconfig=true ||
 
+isset ${kickstarturl} && isset ${ver} && goto mirrorconfig ||
 menu Debian ${arch_a}
 item wheezy Debian 7.0 (wheezy)
 item squeeze Debian 6.0 (squeeze)
 item jessie Debian jessie (testing)
-item sid Debian sid (unstable) 
-choose version || goto debian_exit
-set mirrorcfg mirror/suite=${version} mirror/country=manual mirror/http/hostname=${mirror} mirror/http/directory=/${os}
+item sid Debian sid (unstable)
+choose ver || goto debian_exit
+
+:mirrorconfig
+set mirrorcfg mirror/suite=${ver} mirror/country=manual mirror/http/hostname=${mirror} mirror/http/directory=/${os}
 
 :deb_boot_type
-set dir ${os}/dists/${version}/main/installer-${arch_a}/current/images/netboot/
+set dir ${os}/dists/${ver}/main/installer-${arch_a}/current/images/netboot/
 
+isset ${kickstarturl} && isset ${type} && goto deb_${type} ||
 menu ${os} boot parameters
-item text ${os} text based install
-item graphical ${os} graphical based install
-item rescue ${os} rescue mode 
+item install ${os} install
+item rescue ${os} rescue mode
+item automated ${os} automated install
 item expert ${os} expert install
+item graphical ${os} graphical install
 item preseed ${os} specify preseed url
 choose --default ${type} type || goto debian
 
@@ -33,30 +39,37 @@ goto deb_${type}
 
 :deb_rescue
 set install_params rescue/enable=true
-goto deb_text
+goto deb_boot
+
+:deb_automated
+set install_params auto=true priority=critical
+goto deb_boot
 
 :deb_expert
 set install_params priority=low
-goto deb_text
+goto deb_boot
 
 :deb_preseed
-echo -n Specify preseed URL for ${os} ${version}: && read preseedurl
+isset ${kickstarturl} && set netcfg ${nefcfg} netcfg/get_hostname=unassigned-hostname netcfg/get_domain=unassigned-domain || echo -n Specify preseed URL for ${os} ${ver}:
+isset ${kickstarturl} && set preseedurl ${kickstarturl} || read preseedurl
 set install_params auto=true priority=critical preseed/url=${preseedurl}
-goto deb_text
-
-:deb_text
-set dir ${dir}${menu}-installer/${arch_a}
 goto deb_boot
 
-:deb_graphical
-set dir ${dir}gtk/${menu}-installer/${arch_a}
-set install_params vga=788
-goto deb_boot
-
+:deb_install
 :deb_boot
+set dir ${dir}${menu}-installer/${arch_a}
 imgfree
 echo Boot parameters: ${install_params} -- quiet ${params}
-kernel http://${mirror}/${dir}/linux ${install_params} ${netcfg} ${mirrorcfg} -- quiet ${params}
+kernel http://${mirror}/${dir}/linux ${netcfg} ${install_params} ${mirrorcfg} -- quiet
+initrd http://${mirror}/${dir}/initrd.gz
+boot
+
+:deb_graphical
+set install_params vga=788
+set dir ${dir}gtk/${menu}-installer/${arch_a}
+imgfree
+echo Boot parameters: ${install_params} -- quiet ${params}
+kernel http://${mirror}/${dir}/linux ${install_params} ${netcfg} ${mirrorcfg} -- quiet
 initrd http://${mirror}/${dir}/initrd.gz
 boot
 
