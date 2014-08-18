@@ -11,10 +11,10 @@ set cls ${cls:string}
 
 isset ${arch} && goto skip_arch_detect ||
 cpuid --ext 29 && set arch x86_64 || set arch i386
-:skip_arch_detect
-isset ${menu} && goto ${menu} ||
 
+:skip_arch_detect
 isset ${ip} || dhcp || echo DHCP failed
+isset ${menu} && goto ${menu} || isset ${menu} && chain ${menu}.ipxe ||
 
 :main_menu
 clear version

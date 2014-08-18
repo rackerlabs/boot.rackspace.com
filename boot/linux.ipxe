@@ -1,5 +1,6 @@
 #!ipxe
 
+isset os && set menu ${os}
 goto ${menu} ||
 
 :linux_menu
@@ -9,7 +10,7 @@ iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
 
 # RPM based systems
 item --gap RPM Based Operating Systems
-item centos ${space} CentOS 
+item centos ${space} CentOS
 item fedora ${space} Fedora
 item opensuse ${space} openSUSE
 item scientific ${space} Scientific
