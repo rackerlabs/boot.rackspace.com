@@ -41,7 +41,7 @@ goto bootos_images
 
 :bootos_images
 imgfree
-kernel http://${mirror}/${dir}/isolinux/vmlinuz repo=${repo} ${params} ${netcfg}
+kernel http://${mirror}/${dir}/isolinux/vmlinuz repo=${repo} ${params} ${netcfg} initrd=initrd.img
 initrd http://${mirror}/${dir}/isolinux/initrd.img
 boot
 goto linux_menu
