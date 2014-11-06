@@ -1,0 +1,13 @@
+site_name: boot.rackspace.com
+pages:
+- [index.md, Home]
+- [boot_rscloud.md, Booting with..., Rackspace Cloud Servers]
+- [boot_vbox.md, Booting with..., Virtual Box]
+- [boot_vmware.md, Booting with..., VMware]
+- [boot_drac.md, Booting with..., Dell DRAC]
+- [boot_ilo.md, Booting with..., HP iLO]
+- [image_creation.md, Images, Rackspace Cloud Image Creation]
+- [nova_agent.md, Images, Nova Agent]
+- [cloud_init.md, Images, Cloud Init]
+- [region_info.md, Images, Rackspace Region Info]
+- [image_uuids.md, Images, Rackspace Image UUIDs]
