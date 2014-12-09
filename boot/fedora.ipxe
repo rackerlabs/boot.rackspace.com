@@ -10,11 +10,16 @@ clear osversion
 set os Fedora
 menu Fedora ${arch}
 iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} ksdevice=eth0 ||
+item 21 ${os} 21
 item 20 ${os} 20
 item 19 ${os} 19
 item 18 ${os} 18
 isset ${osversion} || choose osversion || goto linux_menu
 set dir fedora/releases/${osversion}/${os}/${arch}/os
+# Hack for changes to override URL for new F21 SKUs, will fix later
+iseq ${osversion} 21 && set dir fedora/releases/${osversion}/Server/${arch}/os
+# Temporary override until rax mirror are synced with F21
+set mirror mirrors.kernel.org
 set repo http://${mirror}/${dir}
 goto boottype
 
