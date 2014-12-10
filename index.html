@@ -29,27 +29,27 @@
       </header>
       <section>
         <h2>
-<a name="bootrackspacecom-preview" class="anchor" href="#bootrackspacecom-preview"><span class="octicon octicon-link"></span></a>boot.rackspace.com (preview)</h2>
+<a id="bootrackspacecom-preview" class="anchor" href="#bootrackspacecom-preview" aria-hidden="true"><span class="octicon octicon-link"></span></a>boot.rackspace.com (preview)</h2>
 
 <h3>
-<a name="what-is-bootrackspacecom" class="anchor" href="#what-is-bootrackspacecom"><span class="octicon octicon-link"></span></a>What is boot.rackspace.com?</h3>
+<a id="what-is-bootrackspacecom" class="anchor" href="#what-is-bootrackspacecom" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is boot.rackspace.com?</h3>
 
 <p>boot.rackspace.com is a collection of iPXE scripts that allow you to rapidly network boot Operating Systems, Utilities and other tools very easily.  It allows you the flexibility of booting installations without having to go track down and download installation media.  It's especially useful for remote access environments when you don't want to utilize remote attach CD in a Dell DRAC, HP iLO or some other type of remote tool.  It's especially awesome for bootstrapping your own custom installation on a Cloud Server!</p>
 
 <h3>
-<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting started</h3>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started</h3>
 
 <h4>
-<a name="boot-from-rackspace-cloud-servers" class="anchor" href="#boot-from-rackspace-cloud-servers"><span class="octicon octicon-link"></span></a>Boot from Rackspace Cloud Servers</h4>
+<a id="boot-from-rackspace-cloud-servers" class="anchor" href="#boot-from-rackspace-cloud-servers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Boot from Rackspace Cloud Servers</h4>
 
-<p>Each region in Rackspace Cloud Servers contains an <a href="https://github.com/rackerlabs/boot.rackspace.com/wiki/boot.rackspace.com-Image-UUIDs">image</a> named "boot.rackspace.com".  When creating a new Performance Flavor instance (does not currently work on Standard Flavors), specify this image as the image to boot from, select the size of the instance you want, and then boot.  The instance creation will attach a small 1MB iPXE iso to the instance and boot from it.  </p>
+<p>Each region in Rackspace Cloud Servers contains an <a href="https://github.com/rackerlabs/boot.rackspace.com/wiki/boot.rackspace.com-Image-UUIDs">image</a> named "iPXE Boot (boot.rackspace.com)".  When creating a new Performance Flavor instance (does not currently work on Standard Flavors, coming soon!), specify this image as the image to boot from, select the size of the instance you want, and then boot.  The instance creation will attach a small 1MB iPXE iso to the instance and boot from it.  </p>
 
 <p>Once you've booted the instance, you can attach to it with the console.  The networking information of the instance is automatically set so you should drop right into the menu.  In the event automation fails, you'll be prompted for the networking information of the instance.</p>
 
 <p>The instance should chainload onto boot.rackspace.com where you can begin customizing the instance.  This method is ideal for image builders and people who love to tinker.  For more information on building a Rackspace custom image, see the wiki here: <a href="https://github.com/rackerlabs/boot.rackspace.com/wiki">https://github.com/rackerlabs/boot.rackspace.com/wiki</a></p>
 
 <h4>
-<a name="nic-with-embedded-ipxe" class="anchor" href="#nic-with-embedded-ipxe"><span class="octicon octicon-link"></span></a>NIC with Embedded iPXE</h4>
+<a id="nic-with-embedded-ipxe" class="anchor" href="#nic-with-embedded-ipxe" aria-hidden="true"><span class="octicon octicon-link"></span></a>NIC with Embedded iPXE</h4>
 
 <p>If your system has iPXE integrated in your network cards ROM, you can enter iPXE's CLI by entering CTRL-B when prompted and then load boot.rackspace.com by doing:</p>
 
@@ -68,7 +68,7 @@ chain http://boot.rackspace.com/menu.ipxe
 </code></pre>
 
 <h4>
-<a name="boot-from-ipxe-iso" class="anchor" href="#boot-from-ipxe-iso"><span class="octicon octicon-link"></span></a>Boot from iPXE ISO</h4>
+<a id="boot-from-ipxe-iso" class="anchor" href="#boot-from-ipxe-iso" aria-hidden="true"><span class="octicon octicon-link"></span></a>Boot from iPXE ISO</h4>
 
 <p>Obtain ISO image here: </p>
 
@@ -78,7 +78,7 @@ chain http://boot.rackspace.com/menu.ipxe
 <p>To create a bootable CD-ROM, burn the ISO image ipxe.iso (1MB in size) to a blank CD-ROM.  You can also use this ISO file as a virtual CD device in Citrix XenServer, VMware ESXi, VMware Fusion, VirtualBox, or even in a Dell DRAC or HP iLOs virtual CD drive.</p>
 
 <h4>
-<a name="boot-from-ipxe-usb" class="anchor" href="#boot-from-ipxe-usb"><span class="octicon octicon-link"></span></a>Boot from iPXE USB</h4>
+<a id="boot-from-ipxe-usb" class="anchor" href="#boot-from-ipxe-usb" aria-hidden="true"><span class="octicon octicon-link"></span></a>Boot from iPXE USB</h4>
 
 <p>Obtain DSK image here:</p>
 
@@ -100,7 +100,7 @@ chain http://boot.rackspace.com/menu.ipxe
 <p>where sdX is your usb drive.  Substitute /dev/sdX for /dev/fd0 in the case of using a floppy.</p>
 
 <h4>
-<a name="ipxe-images" class="anchor" href="#ipxe-images"><span class="octicon octicon-link"></span></a>iPXE Images</h4>
+<a id="ipxe-images" class="anchor" href="#ipxe-images" aria-hidden="true"><span class="octicon octicon-link"></span></a>iPXE Images</h4>
 
 <p>All iPXE boot images are regenerated every time a commit occurs to the <a href="https://github.com/ipxe/ipxe">iPXE project on Github</a> so that the images always have the latest and greatest updates.  It's merged with the <a href="https://github.com/amesserl/ipxe/tree/osimages">osimages branch</a> with the only deviations right now being the menu <a href="https://github.com/amesserl/ipxe/blob/osimages/src/config/colour.h">color scheme</a>.</p>
 
@@ -109,8 +109,10 @@ chain http://boot.rackspace.com/menu.ipxe
 <a href="https://github.com/rackerlabs/boot_rax/blob/master/ipxe/boot.rackspace.com-main">boot.rackspace.com-main</a> - Uses DHCP</li>
 <li>
 <a href="https://github.com/rackerlabs/boot_rax/blob/master/ipxe/boot.rackspace.com-static">boot.rackspace.com-static</a> - Uses Static only</li>
-</ul><h4>
-<a name="what-operating-systems-are-currently-available-on-bootrackspacecom" class="anchor" href="#what-operating-systems-are-currently-available-on-bootrackspacecom"><span class="octicon octicon-link"></span></a>What Operating Systems are currently available on boot.rackspace.com?</h4>
+</ul>
+
+<h4>
+<a id="what-operating-systems-are-currently-available-on-bootrackspacecom" class="anchor" href="#what-operating-systems-are-currently-available-on-bootrackspacecom" aria-hidden="true"><span class="octicon octicon-link"></span></a>What Operating Systems are currently available on boot.rackspace.com?</h4>
 
 <ul>
 <li>ArchLinux</li>
@@ -124,20 +126,32 @@ chain http://boot.rackspace.com/menu.ipxe
 <li>Scientific</li>
 <li>TinyCoreLinux</li>
 <li>Ubuntu</li>
-</ul><h4>
-<a name="what-utilities-are-currently-available-on-bootrackspacecom" class="anchor" href="#what-utilities-are-currently-available-on-bootrackspacecom"><span class="octicon octicon-link"></span></a>What Utilities are currently available on boot.rackspace.com?</h4>
+</ul>
+
+<h4>
+<a id="experimental-operating-systems" class="anchor" href="#experimental-operating-systems" aria-hidden="true"><span class="octicon octicon-link"></span></a>Experimental Operating Systems</h4>
+
+<ul>
+<li><a href="https://github.com/boot2docker/boot2docker">boot2docker</a></li>
+<li><a href="https://coreos.com/">CoreOS</a></li>
+</ul>
+
+<h4>
+<a id="what-utilities-are-currently-available-on-bootrackspacecom" class="anchor" href="#what-utilities-are-currently-available-on-bootrackspacecom" aria-hidden="true"><span class="octicon octicon-link"></span></a>What Utilities are currently available on boot.rackspace.com?</h4>
 
 <ul>
 <li><a href="http://www.clonezilla.org/">Clonezilla</a></li>
 <li><a href="http://www.hdt-project.org/">HDT</a></li>
 <li><a href="http://www.memtest.org/">Memtest</a></li>
-</ul><h4>
-<a name="updates-to-bootrackspacecom-menus" class="anchor" href="#updates-to-bootrackspacecom-menus"><span class="octicon octicon-link"></span></a>Updates to boot.rackspace.com menus</h4>
+</ul>
+
+<h4>
+<a id="updates-to-bootrackspacecom-menus" class="anchor" href="#updates-to-bootrackspacecom-menus" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updates to boot.rackspace.com menus</h4>
 
 <p>Pull requests are welcome and encouraged.  Feel free to issue a pull request for new versions or tools that you might find useful.  boot.rackspace.com will be deployed automatically with the latest github changes once they've been accepted.</p>
 
 <h4>
-<a name="feedback" class="anchor" href="#feedback"><span class="octicon octicon-link"></span></a>Feedback</h4>
+<a id="feedback" class="anchor" href="#feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feedback</h4>
 
 <p>Feel free to open up an issue on github or contact us via <a href="mailto:bootrax@rackspace.com">bootrax@rackspace.com</a>.</p>
       </section>
