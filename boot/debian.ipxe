@@ -12,7 +12,6 @@ iseq ${manufacturer} Xen && set netcfg netcfg/get_ipaddress=${netX/ip} netcfg/ge
 menu Debian ${arch_a}
 item wheezy Debian 7.0 (wheezy)
 item squeeze Debian 6.0 (squeeze)
-item lenny Debian 5.0 (lenny)
 item jessie Debian jessie (testing)
 item sid Debian sid (unstable) 
 choose version || goto debian_exit
