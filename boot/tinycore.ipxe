@@ -7,7 +7,7 @@
 set tmirror tinycorelinux.net
 
 :tinycore_menu
-set dir 5.x/x86/release
+set dir 6.x/x86/release
 menu TinyCoreLinux
 item --key c Core Core (8 MB)
 choose version || goto tinycore_exit
