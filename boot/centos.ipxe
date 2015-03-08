@@ -30,7 +30,6 @@ menu ${os} ${arch} boot type
 item graphical ${ova} graphical installer
 item text ${ova} text based installer
 item rescue ${ova} rescue
-item automated_rax ${ova} automated RAX build (https://github.com/rackerlabs/base-image-blueprints)
 item kickstart ${ova} set kickstart url [ ${ksurl} ]
 item kickstart_device ${ova} set ksdevice [ ${ksdevice} ]
 isset ${bt} || choose bt || goto centos
@@ -47,10 +46,6 @@ goto bootos_images
 
 :rescue
 set params rescue ||
-goto bootos_images
-
-:automated_rax
-set params text ks=https://raw.githubusercontent.com/rackerlabs/base-image-blueprints/master/CentOS_7_PVHVM.cfg ksdevice=${ksdevice} ||
 goto bootos_images
 
 :kickstart
