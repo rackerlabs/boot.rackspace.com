@@ -17,7 +17,7 @@ isset ${menu} && goto ${menu} ||
 isset ${ip} || dhcp || echo DHCP failed
 
 :main_menu
-clear version
+clear menu
 set space:hex 20:20
 set space ${space:string}
 iseq ${arch} i386 && set arch5 i586 || set arch5 ${arch}
