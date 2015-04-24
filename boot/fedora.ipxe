@@ -12,6 +12,7 @@ clear ova
 set os Fedora
 menu Fedora ${arch}
 iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} ksdevice=eth0 ||
+item 22 ${os} 22 Beta
 item 21 ${os} 21
 item 20 ${os} 20
 item 19 ${os} 19
@@ -28,13 +29,14 @@ menu ${os} ${arch} sku type
 item Cloud ${ova} Cloud
 item Server ${ova} Server
 isset ${sku_type} || choose sku_type || goto fedora
-set dir fedora/releases/${osversion}/${sku_type}/${arch}/os
+iseq ${osversion} 22 && set osversion test/22_Beta
+set dir fedora/releases/${osversion}/${sku_type}/${arch}/os/images/pxeboot
 set ova ${ova} ${sku_type}
 echo ${cls}
 goto boottype
 
 :legacy_sku
-set dir fedora/releases/${osversion}/${os}/${arch}/os
+set dir fedora/releases/${osversion}/${os}/${arch}/os/images/pxeboot
 goto boottype
 
 :boottype
@@ -60,8 +62,8 @@ goto bootos_images
 
 :bootos_images
 imgfree
-kernel http://${mirror}/${dir}/isolinux/vmlinuz repo=${repo} ${params} ${netcfg} initrd=initrd.img
-initrd http://${mirror}/${dir}/isolinux/initrd.img
+kernel http://${mirror}/${dir}/vmlinuz repo=${repo} ${params} ${netcfg} initrd=initrd.img
+initrd http://${mirror}/${dir}/initrd.img
 boot
 goto linux_menu
 
