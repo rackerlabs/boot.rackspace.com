@@ -28,13 +28,13 @@ item Cloud ${ova} Cloud
 item Server ${ova} Server
 isset ${sku_type} || choose sku_type || goto fedora
 iseq ${osversion} 22 && set osversion test/22_Beta
-set dir fedora/releases/${osversion}/${sku_type}/${arch}/os/images/pxeboot
+set dir fedora/releases/${osversion}/${sku_type}/${arch}/os
 set ova ${ova} ${sku_type}
 echo ${cls}
 goto boottype
 
 :legacy_sku
-set dir fedora/releases/${osversion}/${os}/${arch}/os/images/pxeboot
+set dir fedora/releases/${osversion}/${os}/${arch}/os
 goto boottype
 
 :boottype
@@ -60,8 +60,8 @@ goto bootos_images
 
 :bootos_images
 imgfree
-kernel http://${mirror}/${dir}/vmlinuz repo=${repo} ${params} ${netcfg} initrd=initrd.img
-initrd http://${mirror}/${dir}/initrd.img
+kernel http://${mirror}/${dir}/images/pxeboot/vmlinuz repo=${repo} ${params} ${netcfg} initrd=initrd.img
+initrd http://${mirror}/${dir}/images/pxeboot/initrd.img
 boot
 goto linux_menu
 
