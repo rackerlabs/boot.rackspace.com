@@ -15,8 +15,6 @@ iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gat
 item 22 ${os} 22 Beta
 item 21 ${os} 21
 item 20 ${os} 20
-item 19 ${os} 19
-item 18 ${os} 18
 isset ${osversion} || choose osversion || goto linux_menu
 set ova ${os} ${osversion}
 iseq ${osversion} 20 && goto legacy_sku ||
