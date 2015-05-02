@@ -5,18 +5,12 @@
 
 :openbsd_menu
 menu Please pick an OpenBSD version
+item 5.7 OpenBSD 5.7
 item 5.6 OpenBSD 5.6
-item 5.4 OpenBSD 5.4
-item 5.3 OpenBSD 5.3
-item 5.2 OpenBSD 5.2
-item 5.1 OpenBSD 5.1
 choose ver || goto openbsd_exit
 
+iseq ${ver} 5.7 && set image_ver 57 ||
 iseq ${ver} 5.6 && set image_ver 56 ||
-iseq ${ver} 5.4 && set image_ver 54 ||
-iseq ${ver} 5.3 && set image_ver 53 ||
-iseq ${ver} 5.2 && set image_ver 52 ||
-iseq ${ver} 5.1 && set image_ver 51 ||
 
 iseq ${arch} x86_64 && goto openbsd_x64 ||
 set openbsd_arch i386
