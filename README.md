@@ -11,9 +11,8 @@ Check out the new boot.rackspace.com documentation hosted at ReadTheDocs:
 
 Grab these bootloaders and drop them in Fusion/VirtualBox/DRAC/iLO to get started:
 
-[ISO](http://boot.rackspace.com/ipxe/boot.rackspace.com-main.iso)
-
-[Floppy/USB](http://boot.rackspace.com/ipxe/boot.rackspace.com-main.dsk)
+* [ISO](http://boot.rackspace.com/ipxe/boot.rackspace.com-main.iso)
+* [Floppy/USB](http://boot.rackspace.com/ipxe/boot.rackspace.com-main.dsk)
 
 #### Feedback
 
