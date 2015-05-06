@@ -9,6 +9,11 @@ boot.rackspace.com is a collection of iPXE scripts that allow you to rapidly net
 Check out the new boot.rackspace.com documentation hosted at ReadTheDocs:	
 * [http://bootrackspacecom.readthedocs.org/en/latest/](http://bootrackspacecom.readthedocs.org/en/latest/)
 
+Grab these bootloaders in Fusion/VirtualBox/DRAC/iLO to get started.  They assume DHCP and will automatically boot http://boot.rackspace.com/menu.ipxe:
+
+[http://boot.rackspace.com/ipxe/boot.rackspace.com-main.iso](ISO)
+[http://boot.rackspace.com/ipxe/boot.rackspace.com-main.dsk](USB/Floppy)
+
 #### Feedback
 
 Feel free to open up an issue on github or contact us via <bootrax@rackspace.com>.
