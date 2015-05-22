@@ -6,27 +6,14 @@ goto ${menu} ||
 
 menu Linux Operating Systems - Current Selected Architecture [ ${arch} ]
 iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
-
-# RPM based systems
-item --gap RPM Based Operating Systems
+item archlinux ${space} ArchLinux
 item centos ${space} CentOS 
+item debian ${space} Debian
 item fedora ${space} Fedora
+item gentoo ${space} Gentoo
 item opensuse ${space} openSUSE
 item scientific ${space} Scientific
-
-# Deb based systems
-item --gap Debian Based Operating Systems
-item debian ${space} Debian
 item ubuntu ${space} Ubuntu
-
-## BSD systems
-#item --gap BSD Based Operating Systems
-#item bsd ${space} BSD systems
-
-## Other systems
-item --gap Other Linux Distributions
-item archlinux ${space} ArchLinux
-item gentoo ${space} Gentoo
 item tinycore ${space} TinyCoreLinux
 
 # Options
