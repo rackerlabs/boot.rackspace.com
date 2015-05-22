@@ -26,8 +26,8 @@ goto product_sku
 menu ${os} ${arch} sku type
 item Cloud ${ova} Cloud
 item Server ${ova} Server
+iseq ${osversion} 22 && item Workstation ${ova} Workstation && set osversion test/22_Beta
 isset ${sku_type} || choose sku_type || goto fedora
-iseq ${osversion} 22 && set osversion test/22_Beta
 set dir fedora/releases/${osversion}/${sku_type}/${arch}/os
 set ova ${ova} ${sku_type}
 echo ${cls}
