@@ -24,10 +24,9 @@ goto product_sku
 
 :product_sku
 menu ${os} ${arch} sku type
-iseq ${osversion} 22 && item Cloud_Atomic Cloud Atomic
-iseq ${osversion} 21 && item Cloud ${ova} Cloud
+item Cloud_Atomic Cloud Atomic
 item Server ${ova} Server
-iseq ${osversion} 22 && item Workstation ${ova} Workstation
+item Workstation ${ova} Workstation
 isset ${sku_type} || choose sku_type || goto fedora
 set dir fedora/releases/${osversion}/${sku_type}/${arch}/os
 set ova ${ova} ${sku_type}
