@@ -12,7 +12,7 @@ clear ova
 set os Fedora
 menu Fedora ${arch}
 iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} ksdevice=eth0 ||
-item 22 ${os} 22 Beta
+item 22 ${os} 22
 item 21 ${os} 21
 item 20 ${os} 20
 isset ${osversion} || choose osversion || goto linux_menu
@@ -24,9 +24,10 @@ goto product_sku
 
 :product_sku
 menu ${os} ${arch} sku type
-item Cloud ${ova} Cloud
+iseq ${osversion} 22 && item Cloud_Atomic Cloud Atomic
+iseq ${osversion} 21 && item Cloud ${ova} Cloud
 item Server ${ova} Server
-iseq ${osversion} 22 && item Workstation ${ova} Workstation && set osversion test/22_Beta
+iseq ${osversion} 22 && item Workstation ${ova} Workstation
 isset ${sku_type} || choose sku_type || goto fedora
 set dir fedora/releases/${osversion}/${sku_type}/${arch}/os
 set ova ${ova} ${sku_type}
