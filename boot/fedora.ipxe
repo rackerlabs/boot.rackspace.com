@@ -24,7 +24,7 @@ goto product_sku
 
 :product_sku
 menu ${os} ${arch} sku type
-item Cloud_Atomic Cloud Atomic
+item Cloud_Atomic ${ova} Cloud Atomic
 item Server ${ova} Server
 item Workstation ${ova} Workstation
 isset ${sku_type} || choose sku_type || goto fedora
