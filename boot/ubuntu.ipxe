@@ -24,6 +24,7 @@ set dir ${os}/dists/${version}/main/installer-${arch_a}/current/images/netboot/
 
 menu ${os} boot parameters
 item install ${os} install
+item install_hwe ${os} install with HWE backport kernels
 item rescue ${os} rescue mode
 item expert ${os} expert install
 item preseed ${os} specify preseed url
@@ -31,6 +32,10 @@ choose --default ${type} type || goto ubuntu
 
 echo ${cls}
 goto deb_${type}
+
+:deb_install_hwe
+set dir ${os}/dists/${version}-updates/main/installer-${arch_a}/current/images/vivid-netboot/
+goto deb_boot
 
 :deb_rescue
 set install_params rescue/enable=true
