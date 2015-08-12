@@ -13,8 +13,7 @@ iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gat
 menu ${os} ${arch}
 item 7.1.1503 ${os} 7.1
 item 7.0.1406 ${os} 7.0
-item 6.6 ${os} 6.6
-item 6.5 ${os} 6.5
+item 6.7 ${os} 6.7
 item other Choose other version [o]
 isset ${osversion} || choose osversion || goto linux_menu
 iseq ${osversion} other || goto centos_skip_read_osversion
