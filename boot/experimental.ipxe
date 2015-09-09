@@ -4,6 +4,7 @@ menu Experimental Operating Systems
 item --gap Experimental:
 item boot2docker ${space} boot2docker v1.0.0
 item coreos-current ${space} CoreOS Stable Channel
+item rancheros ${space} RancherOS
 
 choose --default ${menu} menu || goto experimental_exit
 echo ${cls}
@@ -28,6 +29,11 @@ kernel ${base-url}/coreos_production_pxe.vmlinuz coreos pxe demo console=tty1 co
 initrd ${base-url}/coreos_production_pxe_image.cpio.gz
 boot
 goto experimental_exit
+
+:rancheros
+chain rancheros.ipxe
+goto experimental_exit
+
 
 :experimental_exit
 clear menu
