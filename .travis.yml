@@ -5,3 +5,16 @@ before_install:
 - sudo apt-get install -qq genisoimage liblzma-dev syslinux
 script:
 - "./script/prep-release.sh"
+before_deploy:
+- cd build
+deploy:
+  provider: cloudfiles
+  username:
+    secure: GxoXmUIHKGJukJaepmJa2qUq+l0jEqCA7ydAQLvjK3ePhssJAfPr7lucivLF0hGXEptI2wBvT15R9u6BeglXqC3xTzqJsH1m3MdfQ8ZaDUhE8/yrEw0JFy6Fb34rR7rmcJyr3FNIzWIUfZa1tjSNDLyry/sekAmjIyTWybl1Ze8=
+  api-key:
+    secure: ANh13FxKZS9br/G5bel303ikgwtEwDWdm4JT66aAx+Wm6H+Y1VDXELm1IwhqelZbhXlHFBecAikyKPDJJKz/6fXSByhMRipU+yETVI45NbZozzZUtT+drG/C4GkJJxsWE65DIl+fbuZPNIst3JlKpQ0T0gtn6UaE/UiSPgdRHUc=
+  region:
+    secure: FrpkQwl1exr583KEACwT1k9cOU7rYXn1FrtGA+xEYTQSK2gAD4iB+PHMSQU5kiuYZ+nC4JdvdOVyqCEwxSUnVyGJeSTnxYndxsXtzBk/TzedKsPRY1cOdNMuDKc4LzfiDTiD8wT+VCnXlr99mSJw6tQsMp2YGuKStuRk8xlukd4=
+  container:
+    secure: dFUaqb8AahPqJjPM1TBb+bA9DZxzvy5ff57hrR8z3nyY9qKQEFsz2LfeDIW7C8nLCCOcD2RiP+dE9FHTwZ1lb9eoxaZi5RbmQx0XylNOZUTEYTNGcmjUZJklAxaE1NoUbmQrQ7wyHiFJBvloPuK27Co+7SVFfekqvT767HTIV9M=
+  skip_cleanup: true
