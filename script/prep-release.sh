@@ -5,14 +5,13 @@
 mkdir -p build/ipxe
 
 # pull down upstream iPXE
-git clone --depth 1 git://github.com/amesserl/ipxe.git ipxe_build
+git clone --depth 1 https://github.com/ipxe/ipxe.git ipxe_build
 
 # copy iPXE config overrides into source tree
 cp ipxe/local/* ipxe_build/src/config/local/
 
 # build iPXE disks
 cd ipxe_build/src
-git checkout -b osimages origin/osimages
 for ipxe_config in `ls ../../ipxe/disks/`
 do
   make EMBED=../../ipxe/disks/$ipxe_config
