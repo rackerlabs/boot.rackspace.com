@@ -20,7 +20,8 @@ iseq ${osversion} other || goto centos_skip_read_osversion
 echo ${cls}
 echo -n Enter version: ${} && read osversion
 :centos_skip_read_osversion
-set dir ${menu}/${osversion}/os/${arch}
+iseq ${osversion} 6.7 && set dir ${menu}/${osversion}/os/${arch} ||
+set dir ${menu}/${osversion}/os/x86_64
 set repo http://${mirror}/${dir}
 goto boottype
 
