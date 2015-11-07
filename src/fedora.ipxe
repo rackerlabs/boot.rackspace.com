@@ -16,7 +16,7 @@ item 23 ${os} 23
 item 22 ${os} 22
 item 21 ${os} 21
 item 20 ${os} 20
-isset ${osversion} || choose --default 22 osversion || goto linux_menu
+isset ${osversion} || choose --default 23 osversion || goto linux_menu
 set ova ${os} ${osversion}
 iseq ${osversion} 20 && goto legacy_sku ||
 iseq ${osversion} 19 && goto legacy_sku ||
