@@ -5,10 +5,12 @@
 
 :freebsd_menu
 menu Please pick a FreeBSD version
+item 10.2 FreeBSD 10.2
 item 10.1 FreeBSD 10.1
 item 10.0 FreeBSD 10.0
 choose ver || goto freebsd_exit
 
+iseq ${ver} 10.2 && set image_ver 10.2-RELEASE ||
 iseq ${ver} 10.1 && set image_ver 10.1-RELEASE ||
 iseq ${ver} 10.0 && set image_ver 10.0-RELEASE ||
 
