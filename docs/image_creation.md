@@ -35,6 +35,8 @@ The XenTools are needed for communication between the host and the guest for con
 
 [XenServer 6.2.0 Tools](http://boot.rackspace.com/files/xentools/xs-tools-6.2.0.iso)
 
+[XenServer 6.5.0 Tools](http://boot.rackspace.com/files/xentools/xs-tools-6.5.0-20200.iso)
+
 ##### To install the tools on Linux:
 
     mkdir tmp
