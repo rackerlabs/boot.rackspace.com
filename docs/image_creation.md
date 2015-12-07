@@ -29,13 +29,10 @@ Once the installation has completed, the server will reboot.  The instance will 
 ### Install XenTools
 The XenTools are needed for communication between the host and the guest for configuration via the xenstore. You can grab the latest versions of XenTools Rackspace uses here:
 
-[XenServer 6.0.0 Tools](http://boot.rackspace.com/files/xentools/xs-tools-6.0.0.iso)
-
-[XenServer 6.1.0 Tools](http://boot.rackspace.com/files/xentools/xs-tools-6.1.0.iso)
-
-[XenServer 6.2.0 Tools](http://boot.rackspace.com/files/xentools/xs-tools-6.2.0.iso)
-
-[XenServer 6.5.0 Tools](http://boot.rackspace.com/files/xentools/xs-tools-6.5.0-20200.iso)
+* [XenServer 6.0.0 Tools](http://boot.rackspace.com/files/xentools/xs-tools-6.0.0.iso)
+* [XenServer 6.1.0 Tools](http://boot.rackspace.com/files/xentools/xs-tools-6.1.0.iso)
+* [XenServer 6.2.0 Tools](http://boot.rackspace.com/files/xentools/xs-tools-6.2.0.iso)
+* [XenServer 6.5.0 Tools](http://boot.rackspace.com/files/xentools/xs-tools-6.5.0-20200.iso)
 
 ##### To install the tools on Linux:
 
