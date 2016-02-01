@@ -9,7 +9,6 @@ goto ${menu} ||
 clear osversion
 set os CentOS
 set ksdevice eth0
-iseq ${manufacturer} Xen && set netcfg ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${dns} ||
 menu ${os} ${arch}
 item 7.2.1511 ${os} 7.2
 item 7.1.1503 ${os} 7.1
@@ -71,5 +70,4 @@ goto linux_menu
 
 :linux_menu
 clear menu
-chain linux.ipxe
 exit 0

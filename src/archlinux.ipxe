@@ -1,12 +1,23 @@
 #!ipxe
 
-# ArchLinux Operating System
+# Arch Linux Operating System
 # http://www.archlinux.org
 
-menu ArchLinux
-item ipxe ArchLinux Graphical Menu
-item ipxe_text ArchLinux Text Menu
-choose version || exit
+goto ${menu} ||
 
-chain http://releng.archlinux.org/pxeboot/${version}.pxe
-exit
+:archlinux
+menu Arch Linux
+item arch Arch Linux Graphical Menu
+item arch_text Arch Linux Text Menu
+choose version || goto archlinux_exit
+goto boot
+
+:boot
+imgfree
+set 209:string cfg/${version}.cfg
+set 210:string http://releng.archlinux.org/pxeboot/boot/
+chain ${210:string}pxelinux.0 || goto linux_menu
+
+:archlinux_exit
+clear menu
+exit 0
