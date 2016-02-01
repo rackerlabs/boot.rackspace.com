@@ -23,7 +23,7 @@ set freebsd_arch amd64
 goto boot_freebsd
 
 :boot_freebsd
-set src http://${boot_domain}/distros/freebsd/${ver}/FreeBSD-${image_ver}-${freebsd_arch}-bootonly-mfsbsd.hd
+set src http://boot.rackspace.com/distros/freebsd/${ver}/FreeBSD-${image_ver}-${freebsd_arch}-bootonly-mfsbsd.hd
 imgfree
 echo This loads an mfsbsd installer (http://mfsbsd.vx.sk/).  
 echo Root password for all images: mfsroot
@@ -40,4 +40,4 @@ exit
 
 :freebsd_exit
 clear menu
-chain bsd.ipxe
+exit 0

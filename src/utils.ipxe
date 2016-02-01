@@ -2,23 +2,42 @@
 
 menu Utilities
 item --gap Utilities:
+item avg ${space} AVG Rescue CD
 item clonezilla ${space} Clonezilla
+item dban ${space} DBAN
+item konboot ${space} konboot
+item f4ubcd ${space} FalconFour's Ultimate Boot CD
+item gparted ${space} GParted
 item hdt ${space} Hardware Detection Tool
-item memtest ${space} MemTest86+
+item Macrium ${space} Macrium Reflect Technicians USB v6.1 Build 936 (WinPE 10.0 x64 Server)
+item memtest_420 ${space} Memtest86+ 4.20
+item minipexp ${space} Digiwiz Mini PE XP 2009
+item memtest_501 ${space} Memtest86+ 5.01
+item netbootcd ${space} NetbootCD.us
+item nortonghost ${space} Norton Ghost x86
+item nortonghostx64 ${space} Norton Ghost x64
+item partition_wizard ${space} Partition Wizard
+item pogostick ${space} Pogostick - Offline Windows Password and Registry Editor
+item supergrub ${space} Super Grub2 Disk
+item --gap netboot.xyz tools:
+item nbxyz-custom ${space} Set Github User [user: ${github_user}]
+item testdistro ${space} Test Distribution ISO
+item testiso ${space} Test  ISO
+item testpr ${space} Test netboot.xyz branch
 choose --default ${menu} menu || goto utils_exit
 echo ${cls}
 goto ${menu} ||
-chain ${menu}.ipxe || goto error
-goto linux_exit
+chain ${menu}.ipxe || goto utils_exit
+goto utils_exit
 
-:hdt
+:avg
 kernel ${memdisk} iso raw
-initrd http://www.hdt-project.org/raw-attachment/wiki/hdt-0.5.0/hdt-0.5.2.iso
+initrd http://download.avg.com/filedir/inst/avg_arl_cdi_all_120_150814a10442.iso
 boot
 goto utils_exit
 
 :clonezilla
-set version 2.2.3-25
+set version 2.4.2-61
 iseq ${arch} x86_64 && set cz_arch amd64 || set cz_arch i686-pae
 set project clonezilla
 set iso ${project}_live_stable/${version}/${project}-live-${version}-${cz_arch}.iso
@@ -30,20 +49,139 @@ set try ${try}x
 initrd ${czurl} || goto retry
 boot || goto utils_exit
 
-:memtest
-chain utils/memtest.bin ${params} && goto main_menu ||
-echo MEMORY ERROR DETECTED! ${errno}
-echo Press any key to continue ...
-read a
+:dban
+set version 2.3.0
+kernel ${memdisk} iso raw
+initrd http://sourceforge.net/projects/dban/files/dban/dban-${version}/dban-${version}_i586.iso/download
+boot || goto utils_exit
+
+:konboot
+kernel ${memdisk} 
+initrd https://godzilla.seedboxes.cc/fsociety/konboot.img
+boot || goto utils_exit
+
+:f4ubcd
+kernel ${memdisk} iso raw
+initrd http://sourceforge.net/projects/repo01/files/F4UBCD/F4UBCD-4.6.iso/download
+boot || goto utils_exit
+
+:gparted
+set version 0.25.0-1
+set project gparted
+set iso ${project}-live-stable/${version}/${project}-live-${version}-amd64.iso
+set czurl http://sourceforge.net/projects/gparted/files/${iso}/download
+kernel ${memdisk} iso raw ${params}
+:retry
+iseq ${try} xxxxx && exit ||
+set try ${try}x
+initrd ${czurl} || goto retry
+boot || goto utils_exit
+
+:hdt
+kernel ${memdisk} iso raw
+initrd http://www.hdt-project.org/raw-attachment/wiki/hdt-0.5.0/hdt-0.5.2.iso
+boot
 goto utils_exit
 
-choose --timeout ${timeout} --default ${menu} menu || goto utils_exit
-echo ${cls}
-goto ${menu} ||
-chain ${menu}.ipxe || goto error
-goto linux_exit
+:Macrium
+kernel ${memdisk} iso raw
+initrd https://sourceforge.net/projects/repo01/files/Macrium_Reflect_Technician/Macrium%20Reflect%20Technicians%20USB%20v6.1%20Build%20936%20%28WinPE%2010.0%20x64%20Server%29.iso/download#
+boot
+goto utils_exit
+
+
+:memtest_420
+chain https://boot.netboot.xyz/utils/memtest86-4.20.bin && goto main_menu ||
+goto utils_exit
+
+:minipexp
+kernel ${memdisk} iso raw
+initrd http://sourceforge.net/projects/repo01/files/MINIPE/minipe_vird_ef2009-01-05.iso/download
+boot
+goto utils_exit
+
+:memtest_501
+chain https://boot.netboot.xyz/utils/memtest86-5.01.bin && goto main_menu ||
+goto utils_exit
+
+:nbxyz-custom
+echo EXPERIMENTAL
+echo 
+echo Make sure you have a fork of https://github.com/antonym/netboot.xyz-custom.
+echo You can then customize your fork as needed and set up your own custom options.
+echo Once your username is set, a custom option will appear on the main menu.
+echo
+echo -n Please enter your Github username: ${} && read github_user
+goto utils_exit 
+
+:netbootcd
+kernel http://netbootcd.us/downloads/6.4.1/vmlinuz
+initrd http://netbootcd.us/downloads/6.4.1/nbinit4.gz
+boot
+goto utils_exit
+
+:nortonghost
+kernel ${memdisk} iso raw
+initrd http://sourceforge.net/projects/repo01/files/Ghost%2012.0.0.8019%20X86.iso/download
+boot || goto utils_exit
+
+:nortonghostx64
+kernel ${memdisk} iso raw
+initrd http://sourceforge.net/projects/repo01/files/Ghost%2012.0.0.8019%20X64.iso/download
+boot || goto utils_exit
+
+:partition_wizard
+kernel ${memdisk} iso raw
+initrd http://www.partitionwizard.com/download/pwfree91-x64.iso
+boot
+goto utils_exit
+
+:pogostick
+kernel ${memdisk} iso raw
+initrd http://pogostick.net/~pnh/ntpasswd/cd140201.zip
+boot
+goto utils_exit
+
+:supergrub
+kernel ${memdisk} iso raw
+initrd https://forja.cenatic.es/frs/download.php/file/1844/super_grub2_disk_hybrid_2.02s3.iso
+boot
+goto utils_exit
+
+:testdistro
+echo This option will allow you to test booting an ISO using memdisk. Please
+echo specify the url of the ISO you want to test and it will automatically
+echo attempt to load the ISO using memdisk.
+echo -n URL: ${} && read distro_iso
+kernel ${memdisk} iso raw
+initrd ${distro_iso}
+boot
+goto utils_exit
+
+:testiso
+echo This option will allow you to test booting an ISO using memdisk. Please
+echo specify the url of the ISO you want to test and it will automatically
+echo attempt to load the ISO using memdisk.
+echo -n URL: ${} && read distro_iso
+kernel ${memdisk} iso raw
+initrd ${distro_iso}
+chain http://godzilla.seedboxes.cc/fsociety/grub/grub.exe --config-file="rootnoverify (hd0);chainloader +1"
+
+:testpr
+clear github_user
+clear github_hash
+echo This will chainload into a testing branch of netboot.xyz.  You'll need to enter
+echo your Github User and the first part of the commit hash of the commit you want
+echo to test or the branch name.  This assumes you are testing from a netboot.xyz 
+echo repo.
+echo
+echo -n Specify Github User Name: ${} && read github_user
+echo -n Specify branch name or hash ( i.e. my_feature or 30b7ca ): ${} && read github_hash
+echo
+echo Attempting to chainload:
+chain --autofree https://raw.githubusercontent.com/${github_user}/netboot.xyz/${github_hash}/src/menu.ipxe || echo Unable to find branch... && sleep 5 && goto utils_exit
+goto utils_exit
 
 :utils_exit
 clear menu
-chain menu.ipxe
 exit 0

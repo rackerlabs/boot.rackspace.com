@@ -4,13 +4,13 @@ goto ${menu} ||
 
 :bsd_menu
 
-menu BSD Operating Systems - Current Selected Architecture [ ${arch} ]
+menu BSD Installers - Current Selected Architecture [ ${arch} ]
 iseq ${arch} x86_64 && set arch_a amd64 || set arch_a ${arch}
 
 # BSD based systems
 item --gap BSD Based Operating Systems
-item openbsd ${space} OpenBSD
 item freebsd ${space} FreeBSD
+item openbsd ${space} OpenBSD
 
 # Options
 item --gap Options:
@@ -20,21 +20,20 @@ choose menu || goto bsd_exit
 
 echo ${cls}
 goto ${menu} ||
+iseq ${sigs_enabled} true && goto verify_sigs || goto change_menu
+
+:verify_sigs
+imgverify ${menu}.ipxe ${sigs}${menu}.ipxe.sig || goto error
+goto change_menu
+
+:change_menu
 chain ${menu}.ipxe || goto error
-goto bsd_exit
+goto bsd_menu
 
 :bsd_exit
 clear menu
-chain menu.ipxe
+exit 0
 
 :changebits
 iseq ${arch} x86_64 && set arch i386 || set arch x86_64
-goto bsd_menu
-
-:openbsd
-chain openbsd.ipxe
-goto bsd_menu
-
-:freebsd
-chain freebsd.ipxe
 goto bsd_menu
