@@ -22,7 +22,7 @@ choose version || goto ubuntu_exit
 set mirrorcfg mirror/suite=${version} mirror/country=manual mirror/http/hostname=${mirror} mirror/http/directory=/${os}
 
 :deb_boot_type
-set dir ${os}/dists/${version}-updates/main/installer-${arch_a}/current/images/netboot/
+set dir ${os}/dists/${version}/main/installer-${arch_a}/current/images/netboot/
 
 menu ${os} boot parameters
 item install ${os} install
